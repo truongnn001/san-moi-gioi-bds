@@ -123,7 +123,7 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2"
           >
-            Liên Hệ <span className="text-primary-400">Tư Vấn</span>
+            Liên Hệ <span className="text-goldLight">Tư Vấn</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -150,7 +150,7 @@ export default function ContactSection() {
               
               <div className="space-y-3 text-sm md:text-base">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary-400 flex-shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-goldLight flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold mb-1">Địa chỉ</p>
                     <p className="text-gray-300">
@@ -161,27 +161,27 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-primary-400 flex-shrink-0 mt-1" />
+                  <Phone className="w-5 h-5 text-goldLight flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold mb-1">Điện thoại</p>
-                    <a href="tel:1900123456" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    <a href="tel:1900123456" className="text-gray-300 hover:text-goldLight transition-colors">
                       1900 123 456
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-primary-400 flex-shrink-0 mt-1" />
+                  <Mail className="w-5 h-5 text-goldLight flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold mb-1">Email</p>
-                    <a href="mailto:info@inlandrealestate.vn" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    <a href="mailto:info@inlandrealestate.vn" className="text-gray-300 hover:text-goldLight transition-colors">
                       info@inlandrealestate.vn
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-primary-400 flex-shrink-0 mt-1" />
+                  <Clock className="w-5 h-5 text-goldLight flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold mb-1">Giờ làm việc</p>
                     <p className="text-gray-300">
@@ -220,7 +220,7 @@ export default function ContactSection() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${
+                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-goldDark focus:border-transparent transition-all ${
                         errors.name ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="Nguyễn Văn A"
@@ -239,7 +239,7 @@ export default function ContactSection() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${
+                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-goldDark focus:border-transparent transition-all ${
                         errors.phone ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="0901234567"
@@ -258,7 +258,7 @@ export default function ContactSection() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${
+                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-goldDark focus:border-transparent transition-all ${
                         errors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="email@example.com"
@@ -276,7 +276,7 @@ export default function ContactSection() {
                       name="consultationType"
                       value={formData.consultationType}
                       onChange={handleChange}
-                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${
+                      className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-goldDark focus:border-transparent transition-all ${
                         errors.consultationType ? 'border-red-500' : 'border-gray-300'
                       }`}
                     >
@@ -302,7 +302,7 @@ export default function ContactSection() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={3}
-                    className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none ${
+                    className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-goldDark focus:border-transparent transition-all resize-none ${
                       errors.message ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="Tôi muốn tìm hiểu về..."
@@ -317,7 +317,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full mt-4 px-6 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full mt-4 px-6 py-2.5 bg-goldDark hover:bg-yellow-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <>

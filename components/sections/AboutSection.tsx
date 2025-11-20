@@ -38,7 +38,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2"
           >
-            Về <span className="text-primary-600">Inland Real Estate</span>
+            Về <span className="text-goldDark">Inland Real Estate</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -63,8 +63,8 @@ export default function AboutSection() {
               whileHover={{ y: -5 }}
               className="bg-white rounded-xl p-3 md:p-4 lg:p-5 shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-primary-100 rounded-full flex items-center justify-center mb-2 md:mb-3 mx-auto">
-                <feature.icon className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-primary-600" />
+              <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-yellow-50 rounded-full flex items-center justify-center mb-2 md:mb-3 mx-auto">
+                <feature.icon className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-goldDark" />
               </div>
               <h3 className="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2 text-center">
                 {feature.title}

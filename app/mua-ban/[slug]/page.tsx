@@ -75,9 +75,9 @@ export default async function ProjectDetailPage({ params }: Props) {
       <div className="bg-white border-b">
         <div className="container-custom py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-primary-600">Trang chủ</Link>
+            <Link href="/" className="hover:text-goldDark">Trang chủ</Link>
             <span>/</span>
-            <Link href="/mua-ban" className="hover:text-primary-600">Mua bán</Link>
+            <Link href="/mua-ban" className="hover:text-goldDark">Mua bán</Link>
             <span>/</span>
             <span className="text-gray-900">{project.title}</span>
           </div>
@@ -87,7 +87,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       <div className="container-custom py-12">
         <Link
           href="/mua-ban"
-          className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 mb-6"
+          className="inline-flex items-center gap-2 text-goldDark hover:opacity-80 mb-6"
         >
           <ArrowLeft className="w-5 h-5" />
           Quay lại danh sách
@@ -127,24 +127,24 @@ export default async function ProjectDetailPage({ params }: Props) {
             {/* Key Info */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-white rounded-xl p-4 shadow">
-                <Maximize className="w-8 h-8 text-primary-600 mb-2" />
+                <Maximize className="w-8 h-8 text-goldDark mb-2" />
                 <div className="text-sm text-gray-600">Diện tích</div>
                 <div className="font-semibold text-gray-900">
                   {getAreaRange(project.area_min, project.area_max)}
                 </div>
               </div>
               <div className="bg-white rounded-xl p-4 shadow">
-                <Home className="w-8 h-8 text-primary-600 mb-2" />
+                <Home className="w-8 h-8 text-goldDark mb-2" />
                 <div className="text-sm text-gray-600">Loại hình</div>
                 <div className="font-semibold text-gray-900">Căn hộ</div>
               </div>
               <div className="bg-white rounded-xl p-4 shadow">
-                <Bed className="w-8 h-8 text-primary-600 mb-2" />
+                <Bed className="w-8 h-8 text-goldDark mb-2" />
                 <div className="text-sm text-gray-600">Phòng ngủ</div>
                 <div className="font-semibold text-gray-900">2-4 PN</div>
               </div>
               <div className="bg-white rounded-xl p-4 shadow">
-                <Bath className="w-8 h-8 text-primary-600 mb-2" />
+                <Bath className="w-8 h-8 text-goldDark mb-2" />
                 <div className="text-sm text-gray-600">Phòng tắm</div>
                 <div className="font-semibold text-gray-900">2-3 WC</div>
               </div>
@@ -181,7 +181,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             <div className="bg-white rounded-2xl p-8 shadow-lg sticky top-24">
               <div className="mb-6">
                 <div className="text-sm text-gray-600 mb-2">Giá từ</div>
-                <div className="text-3xl font-bold text-primary-600">
+                <div className="text-3xl font-bold text-goldDark">
                   {formatPrice(project.price_min)}
                 </div>
               </div>
@@ -203,14 +203,14 @@ export default async function ProjectDetailPage({ params }: Props) {
 
               <Link
                 href="/lien-he"
-                className="block w-full text-center px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors mb-4"
+                className="block w-full text-center px-6 py-3 bg-goldDark text-white rounded-lg font-medium hover:bg-yellow-700 transition-colors mb-4"
               >
                 Liên hệ tư vấn
               </Link>
 
               <a
                 href="tel:1900123456"
-                className="block w-full text-center px-6 py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-50 transition-colors"
+                className="block w-full text-center px-6 py-3 border-2 border-goldDark text-goldDark rounded-lg font-medium hover:bg-yellow-50 transition-colors"
               >
                 Gọi ngay: 1900 123 456
               </a>

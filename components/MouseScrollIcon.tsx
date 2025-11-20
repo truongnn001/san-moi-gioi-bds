@@ -12,9 +12,9 @@ export default function MouseScrollIcon({ onClick, isVisible, isDarkSection }: M
   if (!isVisible) return null
 
   // Color classes based on section background
-  const borderColor = isDarkSection ? 'border-white/60 group-hover:border-white' : 'border-primary-600/60 group-hover:border-primary-600'
-  const dotColor = isDarkSection ? 'bg-white/60 group-hover:bg-white' : 'bg-primary-600/60 group-hover:bg-primary-600'
-  const textColor = isDarkSection ? 'text-white/60 group-hover:text-white' : 'text-primary-600/60 group-hover:text-primary-600'
+  const borderColor = isDarkSection ? 'border-white/60 group-hover:border-white' : 'border-goldDark/60 group-hover:border-goldDark'
+  const dotColor = isDarkSection ? 'bg-white/60 group-hover:bg-white' : 'bg-goldDark/60 group-hover:bg-goldDark'
+  const textColor = isDarkSection ? 'text-white/60 group-hover:text-white' : 'text-goldDark/60 group-hover:text-goldDark'
 
   return (
     <motion.button
@@ -22,7 +22,8 @@ export default function MouseScrollIcon({ onClick, isVisible, isDarkSection }: M
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       onClick={onClick}
-      className="fixed bottom-8 right-8 z-40 group"
+      className="fixed right-8 z-40 group"
+      style={{ bottom: 'calc(2rem + 40px + 0.75rem)' }}
       aria-label="Scroll to next section"
       tabIndex={0}
     >

@@ -38,8 +38,8 @@ export default function FullpageScroll({
   const isAtLastSection = currentSection === totalSections - 1
   
   // Determine if current section has dark background
-  // Section 0 (Hero) and Section 4 (Contact) have dark backgrounds
-  const isDarkSection = currentSection === 0 || currentSection === 4
+  // Section 0 (Hero), Section 2 (Projects), and Section 4 (Contact) have dark backgrounds
+  const isDarkSection = currentSection === 0 || currentSection === 2 || currentSection === 4
 
   // Debug logging
   const log = useCallback((...args: any[]) => {
@@ -270,10 +270,10 @@ export default function FullpageScroll({
         ))}
       </div>
 
-      {/* Mouse Scroll Icon - hide at last section or in footer */}
+      {/* Mouse Scroll Icon - hide only when in footer zone */}
       <MouseScrollIcon 
         onClick={() => scrollToSection(currentSection + 1)}
-        isVisible={currentSection < totalSections - 1 && !isInFooterZone}
+        isVisible={!isInFooterZone}
         isDarkSection={isDarkSection}
       />
 
@@ -323,23 +323,27 @@ interface TimelineNavProps {
 function TimelineNav({ sections, activeSection, onSectionClick, isDarkSection }: TimelineNavProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   
-  // Color classes based on section background
-  const lineColor = isDarkSection ? 'bg-white/20' : 'bg-primary-600/20'
-  const numberActiveColor = isDarkSection ? 'text-white' : 'text-primary-600'
-  const numberInactiveColor = isDarkSection ? 'text-white/45' : 'text-primary-600/45'
-  const numberHoverColor = isDarkSection ? 'hover:opacity-70' : 'hover:opacity-70'
-  const dotActiveColor = isDarkSection ? 'bg-white' : 'bg-primary-600'
-  const dotInactiveColor = isDarkSection ? 'bg-white/30' : 'bg-primary-600/30'
+  // Color classes based on section background - using gold colors
+  const lineColor = isDarkSection ? 'bg-goldLight/30' : 'bg-goldDark/20'
+  const labelActiveColor = isDarkSection ? 'text-goldLight' : 'text-goldDark'
+  const labelInactiveColor = isDarkSection ? 'text-goldLight/50' : 'text-goldDark/50'
+  const dotActiveColor = isDarkSection ? 'bg-goldLight' : 'bg-goldDark'
+  const dotInactiveColor = isDarkSection ? 'bg-goldLight/30' : 'bg-goldDark/30'
+
+  // Capitalize first letter only
+  const capitalizeFirst = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+  }
 
   return (
     <nav 
       className="fixed right-6 md:right-10 top-1/2 -translate-y-1/2 z-50 hidden md:block pointer-events-auto"
       aria-label="Section navigation"
     >
-      {/* Vertical line */}
-      <div className={`absolute right-12 top-0 bottom-0 w-px ${lineColor} pointer-events-none transition-colors duration-300`} />
-      
-      <div className="relative flex flex-col gap-8">
+      <div className="relative flex flex-col gap-6">
+        {/* Vertical line connecting dots - positioned to go through center of dots */}
+        <div className={`absolute right-[4px] top-0 bottom-0 w-px ${lineColor} pointer-events-none transition-colors duration-300`} />
+        
         {sections.map((section, index) => {
           const isActive = index === activeSection
           const isHovered = index === hoveredIndex
@@ -350,45 +354,30 @@ function TimelineNav({ sections, activeSection, onSectionClick, isDarkSection }:
               onClick={() => onSectionClick(index)}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className="relative group flex items-center justify-end"
+              className="relative group flex items-center justify-end gap-3"
               aria-label={`Go to ${section.title}`}
               aria-current={isActive ? 'true' : 'false'}
             >
-              {/* Number indicator */}
+              {/* Label text - italic and capitalize first letter only */}
               <span 
                 className={`
-                  text-sm transition-all duration-300 text-right tabular-nums
+                  text-xs md:text-sm font-medium italic transition-all duration-300 text-right tracking-wide
                   ${isActive 
-                    ? `${numberActiveColor} font-bold opacity-100 scale-110` 
-                    : `${numberInactiveColor} font-normal opacity-100 ${numberHoverColor}`
+                    ? `${labelActiveColor} opacity-100 scale-105` 
+                    : `${labelInactiveColor} opacity-60 hover:opacity-100`
                   }
                 `}
               >
-                {String(index + 1).padStart(2, '0')}
+                {capitalizeFirst(section.title)}
               </span>
 
-              {/* Connection dot to line */}
+              {/* Connection dot */}
               <div 
                 className={`
-                  absolute -right-12 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-300
-                  ${isActive ? `${dotActiveColor} scale-100` : `${dotInactiveColor} scale-75`}
+                  relative z-10 w-2.5 h-2.5 rounded-full transition-all duration-300
+                  ${isActive ? `${dotActiveColor} scale-125` : `${dotInactiveColor} scale-90`}
                 `}
               />
-
-              {/* Tooltip on hover */}
-              {isHovered && !isActive && (
-                <motion.div
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute right-full mr-8 top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none"
-                >
-                  <div className="bg-white/95 backdrop-blur-sm text-gray-900 px-3 py-1.5 rounded-md shadow-lg text-xs font-medium">
-                    {section.title}
-                  </div>
-                </motion.div>
-              )}
             </button>
           )
         })}

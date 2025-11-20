@@ -9,17 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        goldLight: '#e5d46c',
+        goldDark: '#d4a72c',
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50: '#fefce8',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#e5d46c',
+          500: '#d4a72c',
+          600: '#d4a72c',
+          700: '#ca8a04',
+          800: '#a16207',
+          900: '#854d0e',
         },
         secondary: {
           50: '#fdf4ff',

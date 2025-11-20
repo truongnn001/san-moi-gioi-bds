@@ -73,7 +73,7 @@ export default function NewsSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2"
           >
-            Tin Tức <span className="text-primary-600">Nổi Bật</span>
+            Tin Tức <span className="text-goldDark">Nổi Bật</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -88,7 +88,7 @@ export default function NewsSection() {
 
         {loading ? (
           <div className="text-center py-10">
-            <div className="inline-block w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin" />
+            <div className="inline-block w-8 h-8 border-4 border-goldDark border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -110,7 +110,7 @@ export default function NewsSection() {
                       style={{ backgroundImage: `url(${post.thumbnail_url})` }}
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="px-4 py-2 bg-primary-600 text-white rounded-full text-xs font-medium">
+                      <span className="px-4 py-2 bg-goldDark text-white rounded-full text-xs font-medium">
                         {post.category}
                       </span>
                     </div>
@@ -122,7 +122,7 @@ export default function NewsSection() {
                       {formatDate(post.created_at)}
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-goldDark transition-colors line-clamp-2">
                       {post.title}
                     </h3>
 
@@ -130,7 +130,7 @@ export default function NewsSection() {
                       {post.excerpt || truncateText(post.content, 150)}
                     </p>
 
-                    <div className="flex items-center text-primary-600 text-sm font-medium group-hover:translate-x-2 transition-transform">
+                    <div className="flex items-center text-goldDark text-sm font-medium group-hover:translate-x-2 transition-transform">
                       Đọc thêm
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </div>

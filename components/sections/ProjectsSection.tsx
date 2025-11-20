@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import ParallaxSection from '@/components/ParallaxSection'
 import Link from 'next/link'
 import { MapPin, TrendingUp, ArrowRight } from 'lucide-react'
 import { api } from '@/lib/api'
@@ -92,24 +93,29 @@ export default function ProjectsSection() {
     : projects.filter(p => p.status === activeFilter)
 
   return (
-    <section className="h-screen w-full flex items-center justify-center bg-white overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 max-h-[90vh] flex flex-col justify-center">
+    <ParallaxSection
+      backgroundImage="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2400&auto=format&fit=crop"
+      overlay="dark"
+      fullWidth
+      className="h-screen flex items-center justify-center"
+    >
+      <div className="relative w-full px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 max-h-[90vh] flex flex-col justify-center">
         <div className="text-center mb-3 md:mb-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2"
+            className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2"
           >
-            Dự Án <span className="text-primary-600">Nổi Bật</span>
+            Dự Án <span className="text-goldLight">Nổi Bật</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xs md:text-sm lg:text-base text-gray-600 mx-auto"
+            className="text-xs md:text-sm lg:text-base text-white/90 mx-auto"
           >
             Khám phá các dự án bất động sản cao cấp, đáp ứng mọi nhu cầu đầu tư và an cư
           </motion.p>
@@ -135,8 +141,8 @@ export default function ProjectsSection() {
               onClick={() => setActiveFilter(filter.id)}
               className={`px-3 md:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                 activeFilter === filter.id
-                  ? 'bg-primary-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-goldLight text-gray-900 shadow-lg'
+                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
               }`}
             >
               {filter.label}
@@ -147,7 +153,7 @@ export default function ProjectsSection() {
         {/* Projects Grid */}
         {loading ? (
           <div className="text-center py-20">
-            <div className="inline-block w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin" />
+            <div className="inline-block w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-h-[50vh] overflow-y-auto scrollbar-hide">
@@ -179,8 +185,8 @@ export default function ProjectsSection() {
                     </div>
                   </div>
 
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-goldDark transition-colors">
                       {project.title}
                     </h3>
                     
@@ -196,11 +202,11 @@ export default function ProjectsSection() {
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div>
                         <div className="text-xs text-gray-500 mb-1">Giá từ</div>
-                        <div className="text-lg font-bold text-primary-600">
+                        <div className="text-lg font-bold text-goldDark">
                           {formatPrice(project.price_min)}
                         </div>
                       </div>
-                      <div className="flex items-center text-primary-600 text-sm font-medium group-hover:translate-x-2 transition-transform">
+                      <div className="flex items-center text-goldDark text-sm font-medium group-hover:translate-x-2 transition-transform">
                         Xem chi tiết
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </div>
@@ -228,6 +234,6 @@ export default function ProjectsSection() {
           </Link>
         </motion.div>
       </div>
-    </section>
+    </ParallaxSection>
   )
 }

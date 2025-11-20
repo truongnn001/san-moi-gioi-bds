@@ -4,17 +4,22 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const pathname = usePathname()
+
+  // Determine if current route should have white background
+  const isProductRoute = pathname?.startsWith('/san-pham') || pathname === '/mua-ban' || pathname === '/cho-thue' || pathname?.startsWith('/tin-tuc') || pathname?.startsWith('/tuyen-dung') || pathname?.startsWith('/chinh-sach-nhan-su')
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 0)
     }
-
+    handleScroll() // initialize immediately
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -49,11 +54,10 @@ export default function Header() {
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
+        initial={{ y: 0 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+          isProductRoute || isScrolled
             ? 'bg-white shadow-md py-4'
             : 'bg-transparent py-6'
         }`}
@@ -61,12 +65,12 @@ export default function Header() {
         <div className="container-custom">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <div className={`text-2xl font-bold transition-colors duration-300 ${
-                isScrolled ? 'text-gray-900' : 'text-white'
-              }`}>
-                INLAND
-              </div>
+            <Link href="/" className="flex items-center h-full">
+              <img 
+                src="/logo.png" 
+                alt="INLAND Logo" 
+                className="h-12 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -80,8 +84,8 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-1 text-sm font-medium transition-colors duration-300 hover:text-primary-600 ${
-                      isScrolled ? 'text-gray-900' : 'text-white'
+                    className={`flex items-center gap-1 text-sm font-medium transition-colors duration-300 hover:text-goldDark ${
+                      isProductRoute || isScrolled ? 'text-gray-900' : 'text-white'
                     }`}
                   >
                     {item.label}
@@ -102,7 +106,7 @@ export default function Header() {
                         <Link
                           key={subItem.label}
                           href={subItem.href}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-600 transition-colors"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-goldDark transition-colors"
                         >
                           {subItem.label}
                         </Link>
@@ -117,8 +121,8 @@ export default function Header() {
             <Link
               href="/lien-he"
               className={`hidden lg:block px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                isScrolled
-                  ? 'bg-primary-600 text-white hover:bg-primary-700'
+                isProductRoute || isScrolled
+                  ? 'bg-goldDark text-white hover:bg-yellow-700'
                   : 'bg-white text-gray-900 hover:bg-gray-100'
               }`}
             >
@@ -129,7 +133,7 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden p-2 transition-colors duration-300 ${
-                isScrolled ? 'text-gray-900' : 'text-white'
+                isProductRoute || isScrolled ? 'text-gray-900' : 'text-white'
               }`}
               aria-label="Toggle menu"
             >
@@ -162,7 +166,7 @@ export default function Header() {
                       <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block text-lg font-medium text-gray-900 hover:text-primary-600 transition-colors"
+                        className="block text-lg font-medium text-gray-900 hover:text-goldDark transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -173,7 +177,7 @@ export default function Header() {
                               key={subItem.label}
                               href={subItem.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className="text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                              className="text-sm text-gray-600 hover:text-goldDark transition-colors"
                             >
                               {subItem.label}
                             </Link>
@@ -186,7 +190,7 @@ export default function Header() {
                 <Link
                   href="/lien-he"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="mt-8 block w-full text-center px-6 py-3 bg-primary-600 text-white rounded-full font-medium hover:bg-primary-700 transition-colors"
+                  className="mt-8 block w-full text-center px-6 py-3 bg-goldDark text-white rounded-full font-medium hover:bg-yellow-700 transition-colors"
                 >
                   Liên hệ tư vấn
                 </Link>
