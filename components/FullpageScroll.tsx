@@ -120,7 +120,7 @@ export default function FullpageScroll({
     }, 800)
   }, [totalSections, isAnimating, log])
 
-  // Listen for custom scrollToSection events (from BackToTopButton)
+  // Listen for custom scrollToSection events (from BackToTopButton and HashNavigationHandler)
   useEffect(() => {
     const handleScrollToSection = (e: CustomEvent) => {
       const targetSection = e.detail?.section
