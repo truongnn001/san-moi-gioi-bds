@@ -159,6 +159,10 @@ html {
   padding: 0;
   will-change: transform;
   z-index: 10;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .slider-thumb::-webkit-slider-thumb {

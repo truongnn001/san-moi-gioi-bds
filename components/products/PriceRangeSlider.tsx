@@ -18,29 +18,32 @@ export default function PriceRangeSlider({
   formatter?: (n:number)=>string
 }) {
   const [local, setLocal] = useState<[number, number]>(value)
-  const [isDragging, setIsDragging] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [activeThumb, setActiveThumb] = useState<'min' | 'max' | null>(null)
+  const minInputRef = useRef<HTMLInputElement>(null)
+  const maxInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(()=>{ setLocal(value) }, [value])
 
-  // Prevent scroll when dragging
+  // Prevent scroll when dragging - but DON'T block mousemove!
   useEffect(() => {
-    if (!isDragging) return
+    if (!activeThumb) return
 
-    const preventScroll = (e: WheelEvent | TouchEvent) => {
+    const preventScroll = (e: Event) => {
       e.preventDefault()
       e.stopPropagation()
     }
 
-    // Prevent wheel scroll
-    document.addEventListener('wheel', preventScroll, { passive: false })
-    document.addEventListener('touchmove', preventScroll, { passive: false })
+    // Only prevent scroll-related events, NOT mousemove (needed for dragging)
+    window.addEventListener('wheel', preventScroll, { passive: false })
+    window.addEventListener('touchmove', preventScroll, { passive: false })
+    document.body.style.userSelect = 'none'
 
     return () => {
-      document.removeEventListener('wheel', preventScroll)
-      document.removeEventListener('touchmove', preventScroll)
+      window.removeEventListener('wheel', preventScroll)
+      window.removeEventListener('touchmove', preventScroll)
+      document.body.style.userSelect = ''
     }
-  }, [isDragging])
+  }, [activeThumb])
 
   const handle = (idx: 0|1, v: number) => {
     let next: [number, number]
@@ -53,12 +56,30 @@ export default function PriceRangeSlider({
     onChange(next)
   }
 
-  const handleMouseDown = () => {
-    setIsDragging(true)
+  const handlePointerDownMin = (e: React.PointerEvent<HTMLInputElement>) => {
+    setActiveThumb('min')
+    e.currentTarget.setPointerCapture(e.pointerId)
   }
 
-  const handleMouseUp = () => {
-    setIsDragging(false)
+  const handlePointerDownMax = (e: React.PointerEvent<HTMLInputElement>) => {
+    setActiveThumb('max')
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+
+  const handlePointerUpMin = (e: React.PointerEvent<HTMLInputElement>) => {
+    setActiveThumb(null)
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId)
+    } catch {}
+    if (minInputRef.current) minInputRef.current.blur()
+  }
+
+  const handlePointerUpMax = (e: React.PointerEvent<HTMLInputElement>) => {
+    setActiveThumb(null)
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId)
+    } catch {}
+    if (maxInputRef.current) maxInputRef.current.blur()
   }
 
   // Simple percentage calculation
@@ -70,11 +91,7 @@ export default function PriceRangeSlider({
   return (
     <div className="w-full">
       <div 
-        ref={containerRef}
         className="relative h-6"
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchEnd={handleMouseUp}
       >
         {/* Background track - centered vertically */}
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-200 rounded-full" style={{ zIndex: 1 }}></div>
@@ -91,30 +108,32 @@ export default function PriceRangeSlider({
 
         {/* Min range input */}
         <input
+          ref={minInputRef}
           type="range"
           min={min}
           max={max}
           step={step}
           value={local[0]}
           onChange={(e) => handle(0, Number(e.target.value))}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleMouseDown}
+          onPointerDown={handlePointerDownMin}
+          onPointerUp={handlePointerUpMin}
           className="slider-thumb slider-thumb-min"
-          style={{ zIndex: local[0] > max - (max - min) * 0.5 ? 5 : 4 }}
+          style={{ zIndex: activeThumb === 'min' ? 10 : (local[0] > max - (max - min) * 0.5 ? 5 : 4) }}
         />
 
         {/* Max range input */}
         <input
+          ref={maxInputRef}
           type="range"
           min={min}
           max={max}
           step={step}
           value={local[1]}
           onChange={(e) => handle(1, Number(e.target.value))}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleMouseDown}
+          onPointerDown={handlePointerDownMax}
+          onPointerUp={handlePointerUpMax}
           className="slider-thumb slider-thumb-max"
-          style={{ zIndex: local[1] < (max - min) * 0.5 ? 5 : 3 }}
+          style={{ zIndex: activeThumb === 'max' ? 10 : (local[1] < (max - min) * 0.5 ? 5 : 3) }}
         />
       </div>
 

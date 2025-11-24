@@ -148,8 +148,8 @@ export default function IndustrialParkFilterBar({
             min={0}
             max={5000000}
             step={10000}
-            value={[filters.available_area_min || 0, 5000000]}
-            onChange={v => emit({ available_area_min: v[0] })}
+            value={[filters.available_area_min || 0, filters.available_area_max || 5000000]}
+            onChange={v => emit({ available_area_min: v[0], available_area_max: v[1] })}
             formatter={n => `${(n / 10000).toFixed(1)} ha`}
           />
         </div>

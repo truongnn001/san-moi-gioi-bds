@@ -225,6 +225,7 @@ export interface IndustrialParkFilter {
   rental_price_min?: number
   rental_price_max?: number
   available_area_min?: number                   // Diện tích còn trống tối thiểu
+  available_area_max?: number                   // Diện tích còn trống tối đa
   industries?: string[]                         // Ngành nghề
   infrastructure?: string[]                     // Hạ tầng: ['power', 'water', 'internet']
   page?: number
