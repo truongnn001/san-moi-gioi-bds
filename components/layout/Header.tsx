@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Menu } from 'lucide-react'
 import BurgerMenu from '@/components/layout/BurgerMenu'
@@ -13,8 +14,12 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const headerRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
   const { setHeaderHeight } = useLayoutMeasurements()
   const { backgroundType } = useFullpage()
+  
+  // Check if current page is BDS or KCN list page (always light background)
+  const isProductListPage = pathname === '/bat-dong-san' || pathname === '/kcn'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +46,8 @@ export default function Header() {
 
   // All navigation rendered inside BurgerMenu component (no inline desktop nav here)
 
-  const isLight = backgroundType === 'light'
+  // For BDS/KCN pages, always use light/green color. Otherwise follow backgroundType
+  const isLight = isProductListPage || backgroundType === 'light'
   const menuColor = isLight ? 'text-[#358b4e]' : 'text-white'
 
   return (

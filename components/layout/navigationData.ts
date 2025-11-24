@@ -36,11 +36,11 @@ export const navigationTree: NavItem[] = [
   },
   {
     title: 'Bất động sản',
-    href: '/bat-dong-san/danh-sach',
+    href: '/bat-dong-san',
   },
   {
     title: 'Khu công nghiệp',
-    href: '/kcn/tong-quan',
+    href: '/kcn',
   },
   {
     title: 'Góc nhìn chuyên gia',

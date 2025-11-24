@@ -49,6 +49,16 @@ export default function FullpageScroll({
   const totalSections = children.length
   const isAtLastSection = currentSection === totalSections - 1
 
+  // Add fullpage-active class on mount, remove on unmount
+  useEffect(() => {
+    document.body.classList.add('fullpage-active')
+    
+    return () => {
+      document.body.classList.remove('fullpage-active')
+      document.body.classList.remove('footer-zone-active')
+    }
+  }, [])
+
   // Sync with context
   useEffect(() => {
     setContextSection(currentSection)

@@ -1,33 +1,170 @@
-// Project types
-export interface Project {
+// Property types (Bất động sản)
+export interface Property {
   id: string
-  title: string
+  code: string                                  // Mã sản phẩm
+  name: string
   slug: string
-  description: string
-  location: string
-  price_min: number
-  price_max: number
-  area_min: number
-  area_max: number
-  status: 'dang-mo-ban' | 'sap-mo-ban' | 'da-ban'
-  thumbnail_url: string
-  gallery: string[]
+  
+  // Location
+  province: string
+  district?: string
+  ward?: string
+  street?: string
+  address?: string
+  latitude?: number
+  longitude?: number
+  
+  // Property details
+  type: 'nha-pho' | 'can-ho' | 'dat-nen' | 'biet-thu' | 'shophouse' | 'nha-xuong'
+  category?: string
+  status: 'available' | 'sold' | 'reserved'
+  legal_status?: string                         // Pháp lý
+  
+  // Dimensions
+  area: number                                  // Diện tích (m²)
+  land_area?: number
+  construction_area?: number
+  width?: number                                // Mặt tiền
+  length?: number
+  
+  // Structure
+  bedrooms?: number
+  bathrooms?: number
+  floors?: number
+  orientation?: string                          // Hướng nhà
+  
+  // Pricing
+  price: number
+  price_per_sqm?: number
+  negotiable?: boolean
+  
+  // Features
+  furniture?: 'full' | 'basic' | 'empty'        // Nội thất
+  description?: string
+  description_full?: string
+  
+  // Media
+  thumbnail_url?: string
+  video_url?: string
+  images?: PropertyImage[]
+  amenities?: string[]                          // Tiện ích
+  documents?: PropertyDocument[]
+  
+  // Contact
+  contact_name?: string
+  contact_phone?: string
+  contact_email?: string
+  
+  // SEO
+  meta_title?: string
+  meta_description?: string
+  meta_keywords?: string
+  
+  // Timestamps
   created_at: string
   updated_at: string
+  published_at?: string
 }
 
-// Listing types
-export interface Listing {
+export interface PropertyImage {
   id: string
-  project_id: string
-  type: 'can-ho' | 'nha-pho' | 'dat-nen' | 'biet-thu' | 'shophouse'
-  price: number
-  area: number
-  bedrooms: number
-  bathrooms: number
-  thumbnail_url: string
-  gallery: string[]
-  description: string
+  property_id: string
+  url: string
+  caption?: string
+  display_order: number
+  created_at: string
+}
+
+export interface PropertyDocument {
+  id: string
+  property_id: string
+  name: string
+  type: string
+  url: string
+  file_size?: number
+  created_at: string
+}
+
+// Industrial Park types (Khu công nghiệp)
+export interface IndustrialPark {
+  id: string
+  code: string
+  name: string
+  slug: string
+  
+  // Location
+  province: string
+  district?: string
+  address?: string
+  latitude?: number
+  longitude?: number
+  
+  // Park details
+  total_area: number                            // Tổng diện tích (ha)
+  available_area?: number                       // Diện tích còn trống
+  occupancy_rate?: number                       // Tỷ lệ lấp đầy (%)
+  
+  // Infrastructure
+  infrastructure_power?: boolean
+  infrastructure_water?: boolean
+  infrastructure_drainage?: boolean
+  infrastructure_waste?: boolean
+  infrastructure_internet?: boolean
+  infrastructure_road?: boolean
+  infrastructure_security?: boolean
+  
+  // Pricing
+  rental_price_min?: number                     // Giá thuê từ (VND/m²/tháng)
+  rental_price_max?: number
+  land_price?: number
+  
+  // Industries allowed
+  allowed_industries?: string[]                 // Ngành nghề được phép
+  
+  // Features
+  description?: string
+  description_full?: string
+  advantages?: string
+  
+  // Media
+  thumbnail_url?: string
+  video_url?: string
+  images?: IndustrialParkImage[]
+  tenants?: IndustrialParkTenant[]              // Doanh nghiệp
+  
+  // Contact
+  contact_name?: string
+  contact_phone?: string
+  contact_email?: string
+  website_url?: string
+  
+  // SEO
+  meta_title?: string
+  meta_description?: string
+  meta_keywords?: string
+  
+  // Timestamps
+  created_at: string
+  updated_at: string
+  published_at?: string
+}
+
+export interface IndustrialParkImage {
+  id: string
+  park_id: string
+  url: string
+  caption?: string
+  display_order: number
+  created_at: string
+}
+
+export interface IndustrialParkTenant {
+  id: string
+  park_id: string
+  company_name: string
+  industry?: string
+  logo_url?: string
+  website?: string
   created_at: string
 }
 
@@ -50,8 +187,49 @@ export interface Lead {
   phone: string
   email: string
   message: string
-  source: 'homepage' | 'project' | 'contact'
+  source: 'homepage' | 'property' | 'industrial_park' | 'contact'
+  reference_id?: string                         // ID của property hoặc park
+  reference_type?: 'property' | 'industrial_park'
+  status?: 'new' | 'contacted' | 'qualified' | 'closed'
   created_at?: string
+  updated_at?: string
+}
+
+// Filter types for Properties (BĐS)
+export interface PropertyFilter {
+  q?: string                                    // Tìm kiếm
+  type?: string                                 // Loại hình
+  province?: string
+  district?: string
+  ward?: string
+  price_min?: number
+  price_max?: number
+  area_min?: number
+  area_max?: number
+  status?: string                               // Tình trạng
+  legal_status?: string                         // Pháp lý
+  bedrooms?: number
+  orientation?: string                          // Hướng
+  furniture?: string                            // Nội thất
+  amenities?: string[]                          // Tiện ích
+  page?: number
+  limit?: number
+  sort?: 'price-asc' | 'price-desc' | 'area-asc' | 'area-desc' | 'newest'
+}
+
+// Filter types for Industrial Parks (KCN)
+export interface IndustrialParkFilter {
+  q?: string
+  province?: string
+  district?: string
+  rental_price_min?: number
+  rental_price_max?: number
+  available_area_min?: number                   // Diện tích còn trống tối thiểu
+  industries?: string[]                         // Ngành nghề
+  infrastructure?: string[]                     // Hạ tầng: ['power', 'water', 'internet']
+  page?: number
+  limit?: number
+  sort?: 'price-asc' | 'price-desc' | 'area-desc' | 'newest'
 }
 
 // Job types
@@ -73,15 +251,6 @@ export interface User {
   email: string
   role: 'admin' | 'sale'
   created_at: string
-}
-
-// Filter types
-export interface ProjectFilter {
-  location?: string
-  price_min?: number
-  price_max?: number
-  status?: string
-  type?: string
 }
 
 // API Response types
