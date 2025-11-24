@@ -11,15 +11,18 @@
   html {
     scroll-behavior: auto; /* Disable for transform control */
     overflow-x: hidden;
-    overflow-y: hidden; /* Prevent document scroll during fullpage */
   }
 
   body {
     @apply bg-white text-gray-900 antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     overflow-x: hidden;
-    overflow-y: hidden; /* Prevent body scroll */
-    position: fixed; /* Lock body during fullpage */
+  }
+  
+  /* Lock body scroll only when NOT in footer zone */
+  body:not(.footer-zone-active) {
+    overflow-y: hidden;
+    position: fixed;
     width: 100%;
     height: 100vh;
   }

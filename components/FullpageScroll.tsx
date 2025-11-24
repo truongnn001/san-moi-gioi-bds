@@ -60,7 +60,32 @@ export default function FullpageScroll({
 
   useEffect(() => {
     setContextFooterZone(isInFooterZone)
+    
+    // Toggle body class for footer zone
+    if (isInFooterZone) {
+      document.body.classList.add('footer-zone-active')
+    } else {
+      document.body.classList.remove('footer-zone-active')
+    }
   }, [isInFooterZone, setContextFooterZone])
+
+  // Listen for custom scrollToSection events (from BackToTopButton)
+  useEffect(() => {
+    const handleScrollToSection = (e: CustomEvent) => {
+      const targetSection = e.detail?.section
+      if (typeof targetSection === 'number') {
+        // Exit footer zone if needed
+        if (isInFooterZone) {
+          setIsInFooterZone(false)
+          window.scrollTo({ top: 0, behavior: 'auto' })
+        }
+        scrollToSection(targetSection)
+      }
+    }
+
+    window.addEventListener('scrollToSection', handleScrollToSection as EventListener)
+    return () => window.removeEventListener('scrollToSection', handleScrollToSection as EventListener)
+  }, [isInFooterZone, scrollToSection])
 
   // Debug logging
   const log = useCallback((...args: any[]) => {
@@ -116,38 +141,47 @@ export default function FullpageScroll({
   // Handle wheel events
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      e.preventDefault()
-
       // Block if animating
       if (isAnimating) {
         log('Wheel blocked: animating')
+        e.preventDefault()
         return
       }
 
-      // Footer zone handling
+      // Footer zone handling - enter footer
       if (isAtLastSection && e.deltaY > 0 && !isInFooterZone) {
         log('Entering footer zone')
+        e.preventDefault()
         setIsInFooterZone(true)
-        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
+        // Let natural scroll take over by not preventing default after this
+        setTimeout(() => {
+          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+        }, 50)
         return
       }
 
-      if (isInFooterZone && e.deltaY < 0) {
-        log('Exiting footer zone')
-        setIsInFooterZone(false)
-        scrollToSection(totalSections - 1)
-        return
-      }
-
-      // Normal scroll
-      if (!isInFooterZone) {
-        if (Math.abs(e.deltaY) < 5) return
-
-        if (e.deltaY > 0) {
-          scrollToSection(currentSection + 1)
-        } else {
-          scrollToSection(currentSection - 1)
+      // If in footer zone, allow natural scroll
+      if (isInFooterZone) {
+        // Check if scrolling back up and at top of footer
+        if (e.deltaY < 0 && window.scrollY <= window.innerHeight + 50) {
+          e.preventDefault()
+          log('Exiting footer zone')
+          setIsInFooterZone(false)
+          window.scrollTo({ top: 0, behavior: 'auto' })
+          scrollToSection(totalSections - 1)
         }
+        // Otherwise allow natural scroll in footer
+        return
+      }
+
+      // Normal fullpage scroll
+      e.preventDefault()
+      if (Math.abs(e.deltaY) < 5) return
+
+      if (e.deltaY > 0) {
+        scrollToSection(currentSection + 1)
+      } else {
+        scrollToSection(currentSection - 1)
       }
     }
 
@@ -158,7 +192,18 @@ export default function FullpageScroll({
   // Handle keyboard events
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isAnimating || isInFooterZone) return
+      if (isAnimating) return
+
+      // If in footer zone
+      if (isInFooterZone) {
+        if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+          e.preventDefault()
+          setIsInFooterZone(false)
+          window.scrollTo({ top: 0, behavior: 'auto' })
+          scrollToSection(totalSections - 1)
+        }
+        return
+      }
 
       switch (e.key) {
         case 'ArrowDown':
@@ -166,7 +211,9 @@ export default function FullpageScroll({
           e.preventDefault()
           if (isAtLastSection) {
             setIsInFooterZone(true)
-            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
+            setTimeout(() => {
+              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+            }, 50)
           } else {
             scrollToSection(currentSection + 1)
           }
@@ -204,18 +251,24 @@ export default function FullpageScroll({
       const deltaY = touchStartY.current - touchEndY
 
       if (Math.abs(deltaY) > 50) {
+        // Entering footer zone
         if (isAtLastSection && deltaY > 0 && !isInFooterZone) {
           setIsInFooterZone(true)
-          window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
+          setTimeout(() => {
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+          }, 50)
           return
         }
 
-        if (isInFooterZone && deltaY < 0) {
+        // Exiting footer zone
+        if (isInFooterZone && deltaY < 0 && window.scrollY <= window.innerHeight + 50) {
           setIsInFooterZone(false)
+          window.scrollTo({ top: 0, behavior: 'auto' })
           scrollToSection(totalSections - 1)
           return
         }
 
+        // Normal fullpage scroll
         if (!isInFooterZone) {
           if (deltaY > 0) {
             scrollToSection(currentSection + 1)
@@ -245,9 +298,10 @@ export default function FullpageScroll({
       className="fullpage-scroll-container"
       style={{
         position: 'relative',
-        overflow: 'hidden',
-        touchAction: 'none',
-        height: '100vh',
+        overflow: isInFooterZone ? 'visible' : 'hidden',
+        touchAction: isInFooterZone ? 'auto' : 'none',
+        height: isInFooterZone ? 'auto' : '100vh',
+        minHeight: '100vh',
         width: '100%'
       }}
     >

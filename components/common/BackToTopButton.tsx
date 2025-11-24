@@ -7,36 +7,35 @@ import { useFullpage } from '@/components/FullpageContext'
 
 export default function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false)
-  const { backgroundType, currentSection, totalSections } = useFullpage()
+  const { backgroundType, currentSection, totalSections, isInFooterZone } = useFullpage()
 
   useEffect(() => {
     const handleScroll = () => {
       setIsVisible(window.scrollY > 200)
     }
     
-    // Show button if we're on a fullpage scroll page and not on first section
-    if (totalSections > 0 && currentSection > 0) {
+    // Show button if we're on a fullpage scroll page and not on first section OR in footer zone
+    if (totalSections > 0 && (currentSection > 0 || isInFooterZone)) {
       setIsVisible(true)
     } else if (totalSections === 0) {
       // Regular scroll page
       handleScroll()
       window.addEventListener('scroll', handleScroll, { passive: true })
       return () => window.removeEventListener('scroll', handleScroll)
+    } else {
+      setIsVisible(false)
     }
-  }, [currentSection, totalSections])
+  }, [currentSection, totalSections, isInFooterZone])
 
   // Color palette now derives purely from explicit backgroundType via context
 
   const scrollToTop = () => {
-    // Check if we're on a fullpage scroll page by looking for section elements
-    const sections = document.querySelectorAll('[id^="section-"]')
-    
-    if (sections.length > 0) {
-      // Fullpage scroll page - snap to first section
-      const firstSection = document.getElementById('section-0')
-      if (firstSection) {
-        firstSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
+    // If on fullpage scroll page, trigger scroll to top which will handle section navigation
+    if (totalSections > 0) {
+      // Reset scroll position to trigger fullpage scroll to section 0
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // Dispatch a custom event to notify FullpageScroll to go to section 0
+      window.dispatchEvent(new CustomEvent('scrollToSection', { detail: { section: 0 } }))
     } else {
       // Normal scroll page - scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' })
