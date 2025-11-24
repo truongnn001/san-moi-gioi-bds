@@ -102,3 +102,10 @@ export interface PaginatedResponse<T> {
     totalPages: number
   }
 }
+
+export interface SectionData {
+  id: string;
+  index: number;
+  title: string;
+  backgroundType?: 'image' | 'light';
+}

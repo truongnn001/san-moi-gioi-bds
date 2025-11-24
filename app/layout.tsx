@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import BackToTopButton from '@/components/common/BackToTopButton'
+import { FullpageProvider } from '@/components/FullpageContext'
+import { LayoutMeasurementsProvider } from '@/components/LayoutMeasurementsContext'
 
 const inter = Inter({ 
   subsets: ['latin', 'vietnamese'],
@@ -61,11 +63,15 @@ export default function RootLayout({
   return (
     <html lang="vi" className={inter.variable}>
       <body className={inter.className}>
-        <Header />
-        <main>
-          {children}
-        </main>
-        <BackToTopButton />
+        <LayoutMeasurementsProvider>
+          <FullpageProvider>
+            <Header />
+            <main>
+              {children}
+            </main>
+            <BackToTopButton />
+          </FullpageProvider>
+        </LayoutMeasurementsProvider>
       </body>
     </html>
   )

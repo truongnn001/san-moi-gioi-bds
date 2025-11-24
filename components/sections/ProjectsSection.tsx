@@ -99,7 +99,7 @@ export default function ProjectsSection() {
       fullWidth
       className="h-screen flex items-center justify-center"
     >
-      <div className="relative w-full px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 max-h-[90vh] flex flex-col justify-center">
+      <div className="relative w-full px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 max-h-[90vh] overflow-y-auto scrollbar-hide flex flex-col justify-center">
         <div className="text-center mb-3 md:mb-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

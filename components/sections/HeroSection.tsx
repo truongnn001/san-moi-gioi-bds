@@ -96,7 +96,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 w-full max-w-6xl mx-auto px-6 md:px-12 text-center">
+      <div className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 max-h-[90vh] overflow-y-auto scrollbar-hide flex flex-col justify-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,13 +104,13 @@ export default function HeroSection() {
           className="max-w-4xl mx-auto"
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-            Nơi Khởi Đầu
+            INLANDV
             <br />
-            <span className="text-goldLight">Hành Trình An Cư</span>
+            <span className="text-goldLight">Cầu Nối Thịnh Vượng</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Sàn giao dịch bất động sản uy tín, đồng hành cùng bạn trong mọi quyết định đầu tư
+            Cho nhà đầu tư FDI tại Việt Nam với sự am hiểu thị trường Việt Nam & Văn hóa Trung Hoa.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -118,7 +118,7 @@ export default function HeroSection() {
               href="/mua-ban"
               className="btn-primary group bg-goldLight text-gray-900 hover:opacity-90"
             >
-              Khám phá dự án
+              Giải pháp toàn diện
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link

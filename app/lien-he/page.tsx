@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 }
 
 const sections: SectionData[] = [
-  { id: 'gioi-thieu', index: 0, title: 'Giới thiệu' },
-  { id: 'thong-tin', index: 1, title: 'Thông tin' },
-  { id: 'lien-he', index: 2, title: 'Liên hệ' },
+  { id: 'gioi-thieu', index: 0, title: 'Giới thiệu', backgroundType: 'image' },
+  { id: 'thong-tin', index: 1, title: 'Thông tin', backgroundType: 'dark' },
+  { id: 'lien-he', index: 2, title: 'Liên hệ', backgroundType: 'image' },
 ]
 
 export default function ContactPage() {

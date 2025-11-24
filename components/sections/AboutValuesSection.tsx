@@ -39,7 +39,7 @@ const values = [
 export default function AboutValuesSection() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gray-50">
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-12 py-20">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 max-h-[90vh] overflow-y-auto scrollbar-hide flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

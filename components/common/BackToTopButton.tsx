@@ -3,23 +3,21 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUp } from 'lucide-react'
+import { useFullpage } from '@/components/FullpageContext'
 
 export default function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false)
+  const { backgroundType } = useFullpage()
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show button after scrolling 200px
-      if (window.scrollY > 200) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
+      setIsVisible(window.scrollY > 200)
     }
-
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Color palette now derives purely from explicit backgroundType via context
 
   const scrollToTop = () => {
     // Check if we're on a fullpage scroll page by looking for section elements
@@ -37,6 +35,10 @@ export default function BackToTopButton() {
     }
   }
 
+  const isLight = backgroundType === 'light'
+  const paletteBorder = isLight ? 'border-[#358b4e]/70 hover:border-[#2b6f3e]' : 'border-white/70 hover:border-white'
+  const paletteIcon = isLight ? 'text-[#358b4e]/80 group-hover:text-[#358b4e]' : 'text-white/80 group-hover:text-white'
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -46,20 +48,20 @@ export default function BackToTopButton() {
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
-          className="
+          className={`
             fixed bottom-8 right-8
             w-7 h-10
             flex items-center justify-center
-            border-2 border-goldDark/60 hover:border-goldDark
-            bg-transparent
+            border-2 ${paletteBorder}
+            bg-white/5 backdrop-blur-sm
             rounded-full
             transition-all duration-300
             group
-          "
+          `}
           style={{ zIndex: 35 }}
           aria-label="Quay về đầu trang"
         >
-          <ArrowUp className="w-4 h-4 text-goldDark/60 group-hover:text-goldDark transition-colors duration-300" strokeWidth={2.5} />
+          <ArrowUp className={`w-4 h-4 ${paletteIcon} transition-colors duration-300`} strokeWidth={2.5} />
         </motion.button>
       )}
     </AnimatePresence>
