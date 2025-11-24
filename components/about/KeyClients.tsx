@@ -1,9 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Building2, Users, Award, Star } from 'lucide-react'
+import { Building2, Factory, MapPin, Users, Award, Star } from 'lucide-react'
+import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
 
 export default function KeyClients() {
+  const { headerHeight } = useLayoutMeasurements()
+  const paddingTop = headerHeight + 30
+
   const clients = [
     {
       name: 'Logo các công ty',
@@ -23,24 +27,27 @@ export default function KeyClients() {
   ]
 
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white">
-      <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-4 md:py-6 h-full flex flex-col justify-center">
+    <section className="relative h-screen w-full flex items-start justify-start overflow-hidden bg-white">
+      <div 
+        className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pb-4 md:pb-6 h-full flex flex-col"
+        style={{ paddingTop: `${paddingTop}px` }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-5"
         >
           <div className="inline-block px-4 py-2 bg-goldLight/10 rounded-full mb-3">
             <span className="text-goldDark text-sm font-semibold tracking-wide uppercase">
               Khách hàng & Đối tác
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
             Khách hàng <span className="text-goldDark">Tiêu biểu</span>
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto">
             Hợp tác cùng các công ty FDI hàng đầu và KCN lớn trên toàn quốc
           </p>
         </motion.div>
@@ -51,7 +58,7 @@ export default function KeyClients() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3"
         >
           <div className="bg-gradient-to-br from-goldLight/10 to-goldLight/5 rounded-xl p-4 border border-goldDark/10 text-center">
             <Building2 className="w-8 h-8 text-goldDark mx-auto mb-2" />
@@ -76,7 +83,7 @@ export default function KeyClients() {
         </motion.div>
 
         {/* Client Categories */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4">
           {clients.map((client, index) => (
             <motion.div
               key={index}

@@ -45,19 +45,19 @@ export default function OrgChart() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-4 md:mb-6"
         >
           <div className="inline-block px-3 py-1 bg-goldLight/10 rounded-full mb-2">
             <span className="text-goldDark text-sm font-semibold tracking-wide uppercase">
               Cơ cấu tổ chức
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
             Sơ Đồ
             <br />
             <span className="text-goldDark">Tổ Chức</span>
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
             Đội ngũ chuyên nghiệp với cơ cấu tổ chức rõ ràng và hiệu quả
           </p>
         </motion.div>
@@ -69,7 +69,7 @@ export default function OrgChart() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex justify-center mb-8 md:mb-10"
+            className="flex justify-center mb-6 md:mb-8"
           >
             <div className="relative">
               <div className={`

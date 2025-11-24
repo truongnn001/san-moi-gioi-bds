@@ -2,8 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { BarChart3, Factory, TrendingUp, Clock } from 'lucide-react'
+import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
 
 export default function CaseStudiesSection() {
+  const { headerHeight } = useLayoutMeasurements()
+  const paddingTop = headerHeight + 30
+
   const cases = [
     {
       icon: Factory,
@@ -27,7 +31,10 @@ export default function CaseStudiesSection() {
 
   return (
     <section className="relative h-screen w-full isolate flex items-start justify-start overflow-hidden bg-white">
-      <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pt-8 md:pt-12 pb-8 h-full flex flex-col">
+      <div 
+        className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pb-8 h-full flex flex-col"
+        style={{ paddingTop: `${paddingTop}px` }}
+      >
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

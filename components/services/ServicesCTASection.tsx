@@ -1,10 +1,20 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import Link from 'next/link'
 import { Mail, FileSpreadsheet, ArrowRightCircle } from 'lucide-react'
 
 export default function ServicesCTASection() {
+  const sectionRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start']
+  })
+  
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.7])
+
   const actions = [
     { icon: Mail, label: 'Liên hệ tư vấn', href: '/lien-he', desc: 'Trao đổi nhanh với đội ngũ chuyên môn.' },
     { icon: FileSpreadsheet, label: 'Gửi yêu cầu dự án', href: '/lien-he#yeu-cau', desc: 'Nhận đề xuất giải pháp & timeline sơ bộ.' },
@@ -12,9 +22,23 @@ export default function ServicesCTASection() {
   ]
 
   return (
-    <section className="relative h-screen w-full isolate flex items-start justify-start overflow-hidden bg-gradient-to-br from-gray-900 to-black">
-      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,rgba(255,215,130,0.3),transparent_70%)]" />
-      <div className="relative w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pt-10 md:pt-14 pb-8 h-full flex flex-col text-center">
+    <section ref={sectionRef} className="relative h-screen w-full isolate flex items-center justify-center overflow-hidden">
+      {/* Parallax Background */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y }}
+      >
+        <div className="absolute inset-0 bg-black/70 z-[5]" />
+        <div
+          className="absolute inset-0 w-full h-[120%]"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=2000&q=80)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+      </motion.div>
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 text-center">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

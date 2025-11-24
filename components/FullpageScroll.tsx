@@ -5,7 +5,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import MouseScrollIcon from './MouseScrollIcon'
 import TimelineNav from '@/components/TimelineNav'
-import { useFullpage, BackgroundType } from '@/components/FullpageContext'
+import { useFullpage, useFullpageInternal, BackgroundType } from '@/components/FullpageContext'
 
 export interface SectionData {
   id: string
@@ -41,12 +41,26 @@ export default function FullpageScroll({
   const [isInFooterZone, setIsInFooterZone] = useState(false)
   const [activeBackgroundType, setActiveBackgroundType] = useState<BackgroundType>('light')
   const { setBackgroundType } = useFullpage()
+  const { setCurrentSection: setContextSection, setTotalSections: setContextTotal, setIsInFooterZone: setContextFooterZone } = useFullpageInternal()
   const touchStartY = useRef<number>(0)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const animationTimeoutRef = useRef<NodeJS.Timeout>()
   
   const totalSections = children.length
   const isAtLastSection = currentSection === totalSections - 1
+
+  // Sync with context
+  useEffect(() => {
+    setContextSection(currentSection)
+  }, [currentSection, setContextSection])
+
+  useEffect(() => {
+    setContextTotal(totalSections)
+  }, [totalSections, setContextTotal])
+
+  useEffect(() => {
+    setContextFooterZone(isInFooterZone)
+  }, [isInFooterZone, setContextFooterZone])
 
   // Debug logging
   const log = useCallback((...args: any[]) => {

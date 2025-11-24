@@ -46,15 +46,15 @@ export default function MissionVision() {
               Định hướng phát triển
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
             Sứ mệnh & <span className="text-goldDark">Tầm nhìn</span>
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto">
             Chúng tôi hướng đến mục tiêu trở thành đối tác tin cậy nhất cho các nhà đầu tư FDI tại Việt Nam
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4">
           {items.map((item, index) => (
             <motion.div
               key={index}

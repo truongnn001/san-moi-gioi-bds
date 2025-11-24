@@ -2,8 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { Users, Briefcase, Globe2, HeartHandshake, Building2, UserCog } from 'lucide-react'
+import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
 
 export default function FDISupportSection() {
+  const { headerHeight } = useLayoutMeasurements()
+  const paddingTop = headerHeight + 30
+
   const pillars = [
     { icon: Users, title: 'Tuyển dụng địa phương', desc: 'Kết nối nguồn nhân lực phù hợp ngành & văn hoá.' },
     { icon: Briefcase, title: 'Nhân sự & hành chính', desc: 'Thiết lập quy trình nội bộ, hồ sơ lao động, bảo hiểm.' },
@@ -31,7 +35,10 @@ export default function FDISupportSection() {
 
   return (
     <section className="relative h-screen w-full flex items-start justify-start overflow-hidden bg-gradient-to-br from-white to-gray-50">
-      <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pt-8 md:pt-10 pb-6 md:pb-8 h-full flex flex-col">
+      <div 
+        className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pb-6 md:pb-8 h-full flex flex-col"
+        style={{ paddingTop: `${paddingTop}px` }}
+      >
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -44,15 +51,15 @@ export default function FDISupportSection() {
               Hỗ trợ FDI
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
             Vận Hành <span className="text-goldDark">Ổn Định</span> Ngay Từ Ngày Đầu
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto">
             Gói dịch vụ toàn diện giúp doanh nghiệp FDI giảm ma sát khi triển khai hoạt động sản xuất và xây dựng đội ngũ tại Việt Nam.
           </p>
         </motion.div>
 
-        <div className="grid xl:grid-cols-4 md:grid-cols-2 gap-5 mb-6 md:mb-8">
+        <div className="grid xl:grid-cols-4 md:grid-cols-2 gap-5 mb-3">
           {pillars.map((p, i) => {
             const Icon = p.icon
             return (
@@ -74,7 +81,7 @@ export default function FDISupportSection() {
           })}
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 md:gap-8 mt-2">
+        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
           {/* Services list */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}

@@ -7,7 +7,7 @@ export default function StoryOrigin() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white">
       <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-6 md:py-8 max-h-[85vh] overflow-y-auto scrollbar-hide flex flex-col justify-center">
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 items-center">
           {/* Left: Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -41,7 +41,7 @@ export default function StoryOrigin() {
               </span>
             </div>
 
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
               Xuất phát điểm
               <br />
               <span className="text-goldDark">Từ đâu?</span>

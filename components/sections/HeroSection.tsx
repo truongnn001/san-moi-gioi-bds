@@ -103,13 +103,13 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
             INLANDV
             <br />
             <span className="text-goldLight">Cầu Nối Thịnh Vượng</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-200 mb-6 max-w-2xl mx-auto">
             Cho nhà đầu tư FDI tại Việt Nam với sự am hiểu thị trường Việt Nam & Văn hóa Trung Hoa.
           </p>
 

@@ -12,6 +12,7 @@ interface SectionProps {
   isActive?: boolean
   background?: string
   backgroundType?: 'light' | 'image' | 'dark'
+  centerContent?: boolean // For short sections that should be vertically centered
 }
 
 /**
@@ -33,14 +34,13 @@ export default function Section({
   className = '',
   isActive = false,
   background = 'bg-white',
-  backgroundType = 'light'
+  backgroundType = 'light',
+  centerContent = false
 }: SectionProps) {
-  const { headerHeight, timelineWidth } = useLayoutMeasurements()
+  const { headerHeight } = useLayoutMeasurements()
   
   // Calculate safe padding with responsive adjustments
-  const paddingTop = headerHeight + 24 // Header height + 24px spacing
-  // On mobile (timelineWidth = 0 when hidden), only use base padding
-  const paddingRight = timelineWidth > 0 ? timelineWidth + 32 : 24 // Timeline safe area or base padding
+  const paddingTop = headerHeight + 30 // Header height + 30px spacing
 
   return (
     <section
@@ -67,7 +67,7 @@ export default function Section({
     >
       {/* Internal content wrapper - scrollable if content overflows */}
       <div 
-        className="section-content-wrapper w-full h-full"
+        className={`section-content-wrapper w-full h-full ${centerContent ? 'flex items-center' : ''}`}
         style={{
           overflowY: 'auto',
           overflowX: 'hidden',
@@ -76,11 +76,11 @@ export default function Section({
       >
         {/* Section inner container with safe padding */}
         <div 
-          className="section-inner max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20"
+          className="section-inner max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 w-full"
           style={{
-            paddingTop: `${paddingTop}px`,
-            paddingRight: timelineWidth > 0 ? `${timelineWidth + 56}px` : '80px',
-            minHeight: '100%'
+            paddingTop: centerContent ? '0' : `${paddingTop}px`,
+            paddingBottom: centerContent ? '0' : undefined,
+            minHeight: centerContent ? 'auto' : '100%'
           }}
         >
           {children}
@@ -102,12 +102,10 @@ export function HeroSection({
   backgroundImage,
   isActive = false
 }: SectionProps & { backgroundImage?: string }) {
-  const { headerHeight, timelineWidth } = useLayoutMeasurements()
+  const { headerHeight } = useLayoutMeasurements()
   
   // Calculate safe padding with responsive adjustments
-  const paddingTop = headerHeight + 24 // Header height + 24px spacing
-  // On mobile (timelineWidth = 0 when hidden), only use base padding
-  const paddingRight = timelineWidth > 0 ? timelineWidth + 32 : 24 // Timeline safe area or base padding
+  const paddingTop = headerHeight + 30 // Header height + 30px spacing
 
   return (
     <section
@@ -153,7 +151,6 @@ export function HeroSection({
           className="section-inner max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20"
           style={{
             paddingTop: `${paddingTop}px`,
-            paddingRight: timelineWidth > 0 ? `${timelineWidth + 56}px` : '80px',
             minHeight: '100%'
           }}
         >

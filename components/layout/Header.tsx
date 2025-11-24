@@ -7,12 +7,14 @@ import { Menu } from 'lucide-react'
 import BurgerMenu from '@/components/layout/BurgerMenu'
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher'
 import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
+import { useFullpage } from '@/components/FullpageContext'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const headerRef = useRef<HTMLDivElement>(null)
   const { setHeaderHeight } = useLayoutMeasurements()
+  const { backgroundType } = useFullpage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +41,9 @@ export default function Header() {
 
   // All navigation rendered inside BurgerMenu component (no inline desktop nav here)
 
+  const isLight = backgroundType === 'light'
+  const menuColor = isLight ? 'text-[#358b4e]' : 'text-white'
+
   return (
     <motion.header
       ref={headerRef}
@@ -52,7 +57,7 @@ export default function Header() {
           onClick={() => setIsDrawerOpen(true)}
           aria-label="Open navigation"
           className={`flex items-center justify-center w-12 h-12 transition-colors ${
-            isScrolled ? 'text-[#358b4e]' : 'text-white'
+            isScrolled ? 'text-[#358b4e]' : menuColor
           }`}
         >
           <Menu className="w-6 h-6" />
@@ -68,7 +73,7 @@ export default function Header() {
         </Link>
 
         {/* Right: Language switcher */}
-        <LanguageSwitcher scrolled={isScrolled} />
+        <LanguageSwitcher scrolled={isScrolled} backgroundType={backgroundType} />
       </div>
       <BurgerMenu open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
     </motion.header>

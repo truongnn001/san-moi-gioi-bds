@@ -1,9 +1,23 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import { Ruler, Hammer, ClipboardList, Layers, Building, BadgeCheck } from 'lucide-react'
+import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
 
 export default function DesignConstructionSection() {
+  const { headerHeight } = useLayoutMeasurements()
+  const paddingTop = headerHeight + 30
+  const sectionRef = useRef(null)
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start']
+  })
+  
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.7])
+
   const phases = [
     { icon: ClipboardList, title: 'Khảo sát nhu cầu', desc: 'Phân tích công năng, sản lượng, quy chuẩn kỹ thuật.' },
     { icon: Ruler, title: 'Thiết kế concept', desc: 'Phác thảo sơ bộ layout, tối ưu dòng chảy sản xuất.' },
@@ -21,9 +35,26 @@ export default function DesignConstructionSection() {
   ]
 
   return (
-    <section className="relative h-screen w-full flex items-start justify-start overflow-hidden bg-[url(/images/design-bg.jpg)] bg-cover bg-center">
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="relative w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pt-10 md:pt-14 pb-8 h-full flex flex-col text-white">
+    <section ref={sectionRef} className="relative h-screen w-full flex items-start justify-start overflow-hidden">
+      {/* Parallax Background */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y }}
+      >
+        <div className="absolute inset-0 bg-black/60 z-[5]" />
+        <div
+          className="absolute inset-0 w-full h-[120%]"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=2000&q=80)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+      </motion.div>
+      <div 
+        className="relative z-10 w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pb-8 h-full flex flex-col text-white"
+        style={{ paddingTop: `${paddingTop}px` }}
+      >
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -36,15 +67,15 @@ export default function DesignConstructionSection() {
               Thiết kế & Thi công
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-3">
-            Triển Khai <span className="text-goldLight">Chuẩn Hoá</span> & Tối Ưu Dòng Chảy Sản Xuất
+          <h2 className="text-xl md:text-2xl font-bold mb-2">
+            Triển Khai <span className="text-goldLight">Chuẩn Hoá</span> & Tối ưu Dòng Chảy Sản Xuất
           </h2>
-          <p className="text-base md:text-lg text-gray-100 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base text-gray-100 max-w-3xl mx-auto">
             Quy trình tích hợp từ khảo sát đến vận hành đầu kỳ đảm bảo hiệu suất và khả năng mở rộng trong tương lai.
           </p>
         </motion.div>
 
-        <div className="grid xl:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
+        <div className="grid xl:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 gap-2 md:gap-3 mb-4 md:mb-6">
           {phases.map((p, i) => {
             const Icon = p.icon
             return (
@@ -66,7 +97,7 @@ export default function DesignConstructionSection() {
           })}
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}

@@ -7,15 +7,23 @@ import { useFullpage } from '@/components/FullpageContext'
 
 export default function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false)
-  const { backgroundType } = useFullpage()
+  const { backgroundType, currentSection, totalSections } = useFullpage()
 
   useEffect(() => {
     const handleScroll = () => {
       setIsVisible(window.scrollY > 200)
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    
+    // Show button if we're on a fullpage scroll page and not on first section
+    if (totalSections > 0 && currentSection > 0) {
+      setIsVisible(true)
+    } else if (totalSections === 0) {
+      // Regular scroll page
+      handleScroll()
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [currentSection, totalSections])
 
   // Color palette now derives purely from explicit backgroundType via context
 

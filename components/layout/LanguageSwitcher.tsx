@@ -6,6 +6,7 @@ import { ChevronDown } from 'lucide-react'
 
 interface LanguageSwitcherProps {
   scrolled?: boolean
+  backgroundType?: 'light' | 'image' | 'dark'
 }
 
 interface LangOption {
@@ -19,7 +20,7 @@ const options: LangOption[] = [
   { code: 'ZH', label: '中文' }, // Chinese ideographic label
 ]
 
-export default function LanguageSwitcher({ scrolled }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ scrolled, backgroundType = 'image' }: LanguageSwitcherProps) {
   const [current, setCurrent] = useState<LangOption>(options[0])
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
@@ -36,9 +37,12 @@ export default function LanguageSwitcher({ scrolled }: LanguageSwitcherProps) {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
 
-  const baseColor = scrolled ? '#358b4e' : '#ffffff'
-  const inactiveColor = scrolled ? 'text-[#358b4e]/70 hover:text-[#358b4e]' : 'text-white/70 hover:text-white'
-  const activeColor = scrolled ? 'text-[#358b4e]' : 'text-white'
+  const isLight = backgroundType === 'light'
+  const baseColor = scrolled ? '#358b4e' : (isLight ? '#358b4e' : '#ffffff')
+  const inactiveColor = scrolled 
+    ? 'text-[#358b4e]/70 hover:text-[#358b4e]' 
+    : (isLight ? 'text-[#358b4e]/70 hover:text-[#358b4e]' : 'text-white/70 hover:text-white')
+  const activeColor = scrolled ? 'text-[#358b4e]' : (isLight ? 'text-[#358b4e]' : 'text-white')
 
   return (
     <div ref={ref} className="relative select-none">

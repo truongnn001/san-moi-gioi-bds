@@ -135,17 +135,17 @@ export default function PortfolioSection() {
               Hồ sơ năng lực
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
             Các KCN <span className="text-goldDark">Đã Hợp Tác</span>
           </h2>
-          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xs md:text-sm text-gray-600 max-w-3xl mx-auto">
             Đối tác tin cậy của hơn 50+ khu công nghiệp lớn trên toàn quốc
           </p>
         </motion.div>
 
         {/* Industrial Parks Slider */}
         <div
-          className="relative mb-4 md:mb-6"
+          className="relative mb-3 md:mb-4"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >

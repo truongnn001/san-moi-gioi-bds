@@ -48,15 +48,15 @@ export default function KeyTeam() {
               Đội ngũ chuyên gia
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">
             Đội ngũ <span className="text-goldLight">Key Team</span>
           </h2>
-          <p className="text-base md:text-lg text-gray-200 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base text-gray-200 max-w-3xl mx-auto">
             Chuyên gia tư vấn đa ngôn ngữ và giá trị cốt lõi định hướng mọi hoạt động
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {/* Chuyên gia tư vấn */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

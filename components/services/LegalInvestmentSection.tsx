@@ -2,8 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { FileCheck, Hammer, ShieldCheck, ScrollText } from 'lucide-react'
+import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
 
 export default function LegalInvestmentSection() {
+  const { headerHeight } = useLayoutMeasurements()
+  const paddingTop = headerHeight + 30
+
   const services = [
     { icon: FileCheck, title: 'Giấy phép đầu tư', desc: 'Tư vấn hồ sơ & tối ưu thời gian xử lý' },
     { icon: Hammer, title: 'Thủ tục xây dựng', desc: 'Hỗ trợ xin giấy phép xây dựng & PCCC' },
@@ -20,7 +24,10 @@ export default function LegalInvestmentSection() {
 
   return (
     <section className="relative h-screen w-full isolate flex items-start justify-start overflow-hidden bg-white">
-      <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pt-8 md:pt-12 pb-8 h-full flex flex-col">
+      <div 
+        className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pb-8 h-full flex flex-col"
+        style={{ paddingTop: `${paddingTop}px` }}
+      >
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

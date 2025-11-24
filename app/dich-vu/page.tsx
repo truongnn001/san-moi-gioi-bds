@@ -9,7 +9,6 @@ import CaseStudiesSection from '@/components/services/CaseStudiesSection'
 import ServicesTestimonialsSection from '@/components/services/ServicesTestimonialsSection'
 import ServicesCTASection from '@/components/services/ServicesCTASection'
 import Footer from '@/components/layout/Footer'
-import { FullpageProvider } from '@/components/FullpageContext'
 
 export const metadata: Metadata = {
   title: 'Dịch vụ - Inland Real Estate',
@@ -24,25 +23,23 @@ const sections: SectionData[] = [
   { id: 'thiet-ke-thi-cong', index: 4, title: 'Thiết kế', backgroundType: 'image' },
   { id: 'case-study', index: 5, title: 'Case Study', backgroundType: 'light' },
   { id: 'testimonials', index: 6, title: 'Đánh giá', backgroundType: 'light' },
-  { id: 'cta', index: 7, title: 'CTA', backgroundType: 'light' }
+  { id: 'cta', index: 7, title: 'CTA', backgroundType: 'dark' }
 ]
 
 export default function ServicesPage() {
   return (
-    <FullpageProvider>
-      <div className="relative">
-        <FullpageScroll sections={sections}>
-          <ServicesHero />
-          <BrokerageSection />
-          <LegalInvestmentSection />
-          <FDISupportSection />
-          <DesignConstructionSection />
-          <CaseStudiesSection />
-          <ServicesTestimonialsSection />
-          <ServicesCTASection />
-        </FullpageScroll>
-        <Footer />
-      </div>
-    </FullpageProvider>
+    <div className="relative">
+      <FullpageScroll sections={sections}>
+        <ServicesHero />
+        <BrokerageSection />
+        <LegalInvestmentSection />
+        <FDISupportSection />
+        <DesignConstructionSection />
+        <CaseStudiesSection />
+        <ServicesTestimonialsSection />
+        <ServicesCTASection />
+      </FullpageScroll>
+      <Footer />
+    </div>
   )
 }
