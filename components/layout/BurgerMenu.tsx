@@ -18,6 +18,30 @@ export default function BurgerMenu({ open, onClose }: BurgerMenuProps) {
   ), [hoveredIndex])
   const showSub = !!activeItem && !!activeItem.children && activeItem.children.length > 0
 
+  // Handle navigation with hash/anchor
+  const handleNavClick = (href: string) => {
+    onClose()
+    
+    // Check if link has hash/anchor
+    const [path, hash] = href.split('#')
+    
+    if (hash) {
+      // If we're already on the target page, just scroll to section
+      if (window.location.pathname === path) {
+        // Find section index from sections data
+        const sectionElement = document.getElementById(hash)
+        if (sectionElement) {
+          const sectionIndex = parseInt(sectionElement.getAttribute('data-index') || '0')
+          // Dispatch event to FullpageScroll
+          window.dispatchEvent(new CustomEvent('scrollToSection', { detail: { section: sectionIndex } }))
+        }
+      } else {
+        // Navigate to page, then scroll will happen via useEffect in page component
+        // Let Next.js router handle it
+      }
+    }
+  }
+
   // Helper to Title Case each word for main menu
   // Locale-aware title case for Vietnamese; preserve separators
   const ACRONYMS = ['FDI', 'INLANDV', 'KCN', 'BĐS', 'CSR']
@@ -100,7 +124,7 @@ export default function BurgerMenu({ open, onClose }: BurgerMenuProps) {
                         aria-expanded={isActive}
                       >
                         {item.href ? (
-                          <Link href={item.href} onClick={onClose} className="flex-1 text-left">
+                          <Link href={item.href} onClick={() => handleNavClick(item.href!)} className="flex-1 text-left">
                             <span className="text-base text-gray-800">{viTitleCase(item.title)}</span>
                           </Link>
                         ) : (
@@ -133,7 +157,7 @@ export default function BurgerMenu({ open, onClose }: BurgerMenuProps) {
                             {child.href && !hasGrand ? (
                               <Link
                                 href={child.href}
-                                onClick={onClose}
+                                onClick={() => handleNavClick(child.href!)}
                                 className="group block rounded-md px-3 py-2 text-gray-800 hover:bg-gray-50 text-sm border-l-2 border-transparent hover:border-[#358b4e] transition-colors"
                               >
                                 {capitalizeFirst(child.title)}
@@ -150,7 +174,7 @@ export default function BurgerMenu({ open, onClose }: BurgerMenuProps) {
                                     {g.href ? (
                                       <Link
                                         href={g.href}
-                                        onClick={onClose}
+                                        onClick={() => handleNavClick(g.href!)}
                                         className="block rounded-md px-3 py-1.5 text-gray-700 hover:bg-gray-50 text-sm border-l-2 border-transparent hover:border-[#358b4e] transition-colors"
                                       >
                                         {capitalizeFirst(g.title)}

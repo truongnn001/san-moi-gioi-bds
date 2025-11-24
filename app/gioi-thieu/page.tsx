@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import FullpageScroll, { SectionData } from '@/components/FullpageScroll'
+import HashNavigationHandler from '@/components/HashNavigationHandler'
 import AboutHero from '@/components/about/AboutHero'
 import StoryOrigin from '@/components/about/StoryOrigin'
 import MissionVision from '@/components/about/MissionVision'
@@ -27,6 +28,7 @@ const sections: SectionData[] = [
 export default function AboutPage() {
   return (
     <div className="relative">
+      <HashNavigationHandler sections={sections} />
       <FullpageScroll sections={sections}>
         <AboutHero />
         <StoryOrigin />

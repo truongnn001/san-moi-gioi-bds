@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { BarChart3, Factory, TrendingUp, Clock } from 'lucide-react'
+import { Building2, Factory, Home } from 'lucide-react'
 import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
 
 export default function CaseStudiesSection() {
@@ -10,22 +10,43 @@ export default function CaseStudiesSection() {
 
   const cases = [
     {
-      icon: Factory,
-      name: 'Nhà máy linh kiện điện tử',
+      id: 1,
+      title: 'Khu Dân Cư Hiện Đại',
+      category: 'Khu dân cư',
+      image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80',
       result: 'Rút ngắn 25% thời gian set-up',
-      metrics: ['Diện tích 12,000 m²', 'Layout tối ưu dòng nguyên liệu', 'Không phát sinh chỉnh sửa kết cấu']
+      highlights: [
+        'Diện tích 12,000 m²',
+        'Layout tối ưu dòng nguyên liệu',
+        'Không phát sinh chỉnh sửa kết cấu'
+      ],
+      icon: Home
     },
     {
-      icon: BarChart3,
-      name: 'Kho logistics tự động',
+      id: 2,
+      title: 'Khu Công Nghiệp Thông Minh',
+      category: 'Khu công nghiệp',
+      image: 'https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=800&q=80',
       result: 'Tăng 18% hiệu suất lưu chuyển',
-      metrics: ['Giải pháp giá kệ thông minh', 'Luồng xuất nhập liền mạch', 'Tích hợp theo dõi nhiệt độ & PCCC']
+      highlights: [
+        'Giải pháp giá kệ thông minh',
+        'Luồng xuất nhập liền mạch',
+        'Tích hợp theo dõi nhiệt độ & PCCC'
+      ],
+      icon: Factory
     },
     {
-      icon: TrendingUp,
-      name: 'Mở rộng xưởng chế tạo',
+      id: 3,
+      title: 'Môi Giới Cho Thuê Nhà Máy',
+      category: 'Môi giới nhà máy',
+      image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
       result: 'Giảm 30% chi phí tái cấu trúc',
-      metrics: ['Tận dụng kết cấu cũ', 'Bổ sung MEP đồng bộ', 'Không gián đoạn sản xuất']
+      highlights: [
+        'Tận dụng kết cấu cũ',
+        'Bổ sung MEP đồng bộ',
+        'Không gián đoạn sản xuất'
+      ],
+      icon: Building2
     }
   ]
 
@@ -55,36 +76,79 @@ export default function CaseStudiesSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5 md:gap-6">
-          {cases.map((c, i) => {
-            const Icon = c.icon
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-[1450px] mx-auto">
+          {cases.map((project, i) => {
+            const Icon = project.icon
             return (
               <motion.div
-                key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
+                key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-shadow flex flex-col"
+                className="group relative rounded-xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-500"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-xl bg-goldLight/25 flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-goldDark" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-gray-900 text-sm md:text-base">{c.name}</div>
-                    <div className="text-xs text-goldDark font-semibold">{c.result}</div>
+                {/* Image Container with 3:4 aspect ratio */}
+                <div className="relative w-full aspect-[3/4] overflow-hidden">
+                  <motion.div
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <div
+                      className="w-full h-full bg-cover bg-center"
+                      style={{ backgroundImage: `url(${project.image})` }}
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  </motion.div>
+
+                  {/* Title on image */}
+                  <div className="absolute top-4 left-4 right-4 z-10">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <div className="w-10 h-10 rounded-lg bg-goldLight/90 backdrop-blur-sm flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-goldDark" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-bold text-white drop-shadow-lg leading-tight">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-goldLight font-medium uppercase tracking-wide mt-1">
+                      {project.category}
+                    </p>
                   </div>
                 </div>
-                <ul className="space-y-2 mb-4 flex-1">
-                  {c.metrics.map((m, j) => (
-                    <li key={j} className="flex gap-2 text-xs text-gray-600">
-                      <Clock className="w-4 h-4 text-goldDark flex-shrink-0" />
-                      <span>{m}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="text-[11px] text-gray-500">* Số liệu minh hoạ nội bộ</div>
+
+                {/* Text Content Block */}
+                <motion.div
+                  className="p-4 bg-white"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Result highlight */}
+                  <div className="mb-3 pb-3 border-b border-gray-100">
+                    <div className="text-sm font-bold text-goldDark">
+                      {project.result}
+                    </div>
+                  </div>
+
+                  {/* Highlights list */}
+                  <ul className="space-y-2">
+                    {project.highlights.map((highlight, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs text-gray-600 leading-relaxed">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-goldDark mt-1.5 flex-shrink-0" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Footer note */}
+                  <div className="mt-3 pt-3 border-t border-gray-100">
+                    <p className="text-[10px] text-gray-400 italic">
+                      * Số liệu minh hoạ nội bộ
+                    </p>
+                  </div>
+                </motion.div>
               </motion.div>
             )
           })}

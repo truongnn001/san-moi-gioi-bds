@@ -69,24 +69,6 @@ export default function FullpageScroll({
     }
   }, [isInFooterZone, setContextFooterZone])
 
-  // Listen for custom scrollToSection events (from BackToTopButton)
-  useEffect(() => {
-    const handleScrollToSection = (e: CustomEvent) => {
-      const targetSection = e.detail?.section
-      if (typeof targetSection === 'number') {
-        // Exit footer zone if needed
-        if (isInFooterZone) {
-          setIsInFooterZone(false)
-          window.scrollTo({ top: 0, behavior: 'auto' })
-        }
-        scrollToSection(targetSection)
-      }
-    }
-
-    window.addEventListener('scrollToSection', handleScrollToSection as EventListener)
-    return () => window.removeEventListener('scrollToSection', handleScrollToSection as EventListener)
-  }, [isInFooterZone, scrollToSection])
-
   // Debug logging
   const log = useCallback((...args: any[]) => {
     if (debug) {
@@ -137,6 +119,24 @@ export default function FullpageScroll({
       log('Animation complete, unlocked')
     }, 800)
   }, [totalSections, isAnimating, log])
+
+  // Listen for custom scrollToSection events (from BackToTopButton)
+  useEffect(() => {
+    const handleScrollToSection = (e: CustomEvent) => {
+      const targetSection = e.detail?.section
+      if (typeof targetSection === 'number') {
+        // Exit footer zone if needed
+        if (isInFooterZone) {
+          setIsInFooterZone(false)
+          window.scrollTo({ top: 0, behavior: 'auto' })
+        }
+        scrollToSection(targetSection)
+      }
+    }
+
+    window.addEventListener('scrollToSection', handleScrollToSection as EventListener)
+    return () => window.removeEventListener('scrollToSection', handleScrollToSection as EventListener)
+  }, [isInFooterZone, scrollToSection])
 
   // Handle wheel events
   useEffect(() => {
