@@ -6,7 +6,7 @@ import { Lightbulb, TrendingUp, Users } from 'lucide-react'
 export default function StoryOrigin() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-6 md:py-8 max-h-[90vh] overflow-y-auto scrollbar-hide flex flex-col justify-center">
+      <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-6 md:py-8 max-h-[85vh] overflow-y-auto scrollbar-hide flex flex-col justify-center">
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
           {/* Left: Image */}
           <motion.div

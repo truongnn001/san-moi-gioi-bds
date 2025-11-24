@@ -21,7 +21,7 @@ export default function AboutCTASection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 max-h-[90vh] overflow-y-auto scrollbar-hide flex flex-col justify-center text-center">
+      <div className="relative z-20 w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-4 md:py-6 max-h-[85vh] overflow-y-auto scrollbar-hide flex flex-col justify-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

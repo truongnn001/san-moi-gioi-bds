@@ -59,7 +59,8 @@ export default function Section({
         position: 'relative',
         margin: 0,
         padding: 0,
-        isolation: 'isolate'
+        isolation: 'isolate',
+        zIndex: 10
       }}
       role="region"
       aria-label={title}
@@ -75,10 +76,10 @@ export default function Section({
       >
         {/* Section inner container with safe padding */}
         <div 
-          className="section-inner max-w-[1400px] mx-auto px-6"
+          className="section-inner max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20"
           style={{
             paddingTop: `${paddingTop}px`,
-            paddingRight: `${paddingRight}px`,
+            paddingRight: timelineWidth > 0 ? `${timelineWidth + 56}px` : '80px',
             minHeight: '100%'
           }}
         >
@@ -121,7 +122,8 @@ export function HeroSection({
         position: 'relative',
         margin: 0,
         padding: 0,
-        isolation: 'isolate'
+        isolation: 'isolate',
+        zIndex: 10
       }}
       role="region"
       aria-label={title}
@@ -148,10 +150,10 @@ export function HeroSection({
       >
         {/* Section inner container with safe padding */}
         <div 
-          className="section-inner max-w-[1400px] mx-auto px-6"
+          className="section-inner max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20"
           style={{
             paddingTop: `${paddingTop}px`,
-            paddingRight: `${paddingRight}px`,
+            paddingRight: timelineWidth > 0 ? `${timelineWidth + 56}px` : '80px',
             minHeight: '100%'
           }}
         >

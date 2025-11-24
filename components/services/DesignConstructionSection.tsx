@@ -23,7 +23,7 @@ export default function DesignConstructionSection() {
   return (
     <section className="relative h-screen w-full flex items-start justify-start overflow-hidden bg-[url(/images/design-bg.jpg)] bg-cover bg-center">
       <div className="absolute inset-0 bg-black/50" />
-      <div className="relative w-full max-w-7xl mx-auto px-5 sm:px-6 md:px-8 md:pr-20 lg:pr-28 pt-10 md:pt-14 pb-8 h-full flex flex-col text-white">
+      <div className="relative w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pt-10 md:pt-14 pb-8 h-full flex flex-col text-white">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

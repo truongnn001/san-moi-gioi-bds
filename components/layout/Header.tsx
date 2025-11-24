@@ -42,7 +42,7 @@ export default function Header() {
   return (
     <motion.header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-colors duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] backdrop-blur-sm transition-colors duration-300 ${
         isScrolled ? 'bg-white/90 shadow-sm' : 'bg-transparent'
       }`}
     >

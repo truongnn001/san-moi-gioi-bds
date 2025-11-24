@@ -31,7 +31,7 @@ export default function FDISupportSection() {
 
   return (
     <section className="relative h-screen w-full flex items-start justify-start overflow-hidden bg-gradient-to-br from-white to-gray-50">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 pt-8 md:pt-10 pb-6 md:pb-8 h-full flex flex-col">
+      <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 pt-8 md:pt-10 pb-6 md:pb-8 h-full flex flex-col">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

@@ -57,8 +57,8 @@ export default function BackToTopButton() {
             rounded-full
             transition-all duration-300
             group
+            z-[90]
           `}
-          style={{ zIndex: 35 }}
           aria-label="Quay về đầu trang"
         >
           <ArrowUp className={`w-4 h-4 ${paletteIcon} transition-colors duration-300`} strokeWidth={2.5} />

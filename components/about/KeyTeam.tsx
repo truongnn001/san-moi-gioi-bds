@@ -35,7 +35,7 @@ export default function KeyTeam() {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/70 z-[5]" />
       
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 h-full flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-4 md:py-6 h-full flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

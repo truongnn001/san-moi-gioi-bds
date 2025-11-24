@@ -33,7 +33,7 @@ export default function MissionVision() {
 
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 md:pr-20 lg:pr-28 py-4 md:py-6 h-full flex flex-col justify-center">
+      <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-4 md:py-6 h-full flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

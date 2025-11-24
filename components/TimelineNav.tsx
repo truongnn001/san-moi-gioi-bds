@@ -44,7 +44,7 @@ export default function TimelineNav({ sections, activeSection, onSectionClick, b
   return (
     <nav
       ref={navRef} 
-      className="fixed right-6 md:right-10 top-1/2 -translate-y-1/2 z-50 hidden md:block pointer-events-auto"
+      className="fixed right-6 md:right-10 top-1/2 -translate-y-1/2 z-[90] hidden md:block pointer-events-auto"
       aria-label="Section navigation"
     >
       <div className="relative flex flex-col gap-6">

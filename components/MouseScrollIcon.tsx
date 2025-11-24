@@ -25,7 +25,7 @@ export default function MouseScrollIcon({ onClick, isVisible, backgroundType }: 
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       onClick={onClick}
-      className="fixed right-8 z-40 group"
+      className="fixed right-8 z-[90] group"
       style={{ bottom: 'calc(2rem + 40px + 0.75rem)' }}
       aria-label="Scroll to next section"
       tabIndex={0}
