@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import { useFullpage } from '@/components/FullpageContext'
 
 export default function ServicesHero() {
   const sectionRef = useRef(null)
@@ -12,13 +13,14 @@ export default function ServicesHero() {
   
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.6])
+  const { currentSection } = useFullpage()
 
   return (
     <section ref={sectionRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Parallax Background */}
       <motion.div 
         className="absolute inset-0 z-0"
-        style={{ y }}
+        style={{ y: currentSection === 0 ? '0%' : y }}
       >
         <div className="absolute inset-0 bg-black/60 z-[5]" />
         <div

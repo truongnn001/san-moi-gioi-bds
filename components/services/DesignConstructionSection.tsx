@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import { useFullpage } from '@/components/FullpageContext'
 import { Ruler, Hammer, ClipboardList, Layers, Building, BadgeCheck } from 'lucide-react'
 import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
 
@@ -17,6 +18,7 @@ export default function DesignConstructionSection() {
   
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.7])
+  const { currentSection } = useFullpage()
 
   const phases = [
     { icon: ClipboardList, title: 'Khảo sát nhu cầu', desc: 'Phân tích công năng, sản lượng, quy chuẩn kỹ thuật.' },
@@ -39,7 +41,7 @@ export default function DesignConstructionSection() {
       {/* Parallax Background */}
       <motion.div 
         className="absolute inset-0"
-        style={{ y }}
+        style={{ y: currentSection === 0 ? '0%' : y }}
       >
         <div className="absolute inset-0 bg-black/60 z-[5]" />
         <div
