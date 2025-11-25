@@ -2,8 +2,21 @@
 
 import { motion } from 'framer-motion'
 import { UserCircle, Briefcase, Scale, Building2 } from 'lucide-react'
+import { useFullpage } from '@/components/FullpageContext'
+import { useEffect, useState } from 'react'
 
 export default function KeyTeam() {
+  // Section index in gioi-thieu page definition
+  const SECTION_INDEX = 4
+  const { currentSection } = useFullpage()
+  const [revealed, setRevealed] = useState(false)
+
+  useEffect(() => {
+    if (currentSection === SECTION_INDEX && !revealed) {
+      // Force reveal when navigated directly via hash (#doi-ngu)
+      setRevealed(true)
+    }
+  }, [currentSection, revealed])
   const experts = [
     {
       category: 'Chuyên gia tư vấn',
@@ -38,9 +51,8 @@ export default function KeyTeam() {
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-4 md:py-6 h-full flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-8"
         >
           <div className="inline-block px-4 py-2 bg-goldLight/20 backdrop-blur-sm rounded-full mb-3">
@@ -60,9 +72,8 @@ export default function KeyTeam() {
           {/* Chuyên gia tư vấn */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.6, delay: revealed ? 0.2 : 0 }}
             className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border-2 border-goldDark/20"
           >
             <div className="flex items-center gap-4 mb-6">
@@ -92,9 +103,8 @@ export default function KeyTeam() {
           {/* Giá trị cốt lõi */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
+            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            transition={{ duration: 0.6, delay: revealed ? 0.3 : 0 }}
             className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border-2 border-goldDark/20"
           >
             <div className="flex items-center gap-4 mb-6">
