@@ -17,6 +17,7 @@ export default function IndustrialParkFilterBar({
 }) {
   const [filters, setFilters] = useState<IndustrialParkFilter>({
     q: '',
+    demand: undefined,
     province: undefined,
     district: undefined,
     rental_price_min: 0,
@@ -36,6 +37,11 @@ export default function IndustrialParkFilterBar({
   }
 
   // Options
+  const demandOptions: Option[] = [
+    { label: 'Thuê', value: 'rent' },
+    { label: 'Mua sở hữu', value: 'buy' },
+  ]
+
   const provinceOptions = useMemo(() => vnProvinces.map(p => ({ label: p, value: p })), [])
   const districtOptions = useMemo(() => {
     if (!filters.province) return []
@@ -98,7 +104,7 @@ export default function IndustrialParkFilterBar({
 
       {/* Row 1: Basic Search */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-4 mt-2">
-        <div className="lg:col-span-6 relative">
+        <div className="lg:col-span-4 relative">
           <input
             value={filters.q || ''}
             onChange={e => emit({ q: e.target.value })}
@@ -106,6 +112,17 @@ export default function IndustrialParkFilterBar({
             className="w-full h-12 md:h-14 px-4 md:px-5 pr-12 rounded-xl border border-gray-200 focus:border-goldDark outline-none"
           />
           <Search className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-goldDark" />
+        </div>
+        <div className="lg:col-span-2">
+          <ProductFilterDropdown
+            label="Nhu cầu"
+            options={demandOptions}
+            value={filters.demand || ''}
+            onChange={v => emit({ demand: v || undefined })}
+            isOpen={activeDropdown === 'demand'}
+            onOpen={() => setActiveDropdown('demand')}
+            onClose={() => setActiveDropdown(null)}
+          />
         </div>
         <div className="lg:col-span-3">
           <ProductFilterDropdown

@@ -62,7 +62,7 @@ export const navigationTree: NavItem[] = [
       ] },
     ],
   },
-  { title: 'Tuyển dụng', href: '/tuyen-dung/danh-sach' },
+  { title: 'Tuyển dụng', href: '/tuyen-dung' },
   { title: 'Case Studies', href: '/case-studies' },
-  { title: 'Liên hệ', href: '/lien-he/form' },
+  { title: 'Liên hệ', href: '/lien-he' },
 ]

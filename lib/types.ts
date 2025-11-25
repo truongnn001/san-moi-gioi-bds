@@ -198,6 +198,7 @@ export interface Lead {
 // Filter types for Properties (BĐS)
 export interface PropertyFilter {
   q?: string                                    // Tìm kiếm
+  demand?: string                               // Nhu cầu: 'rent' | 'buy'
   type?: string                                 // Loại hình
   province?: string
   district?: string
@@ -220,6 +221,7 @@ export interface PropertyFilter {
 // Filter types for Industrial Parks (KCN)
 export interface IndustrialParkFilter {
   q?: string
+  demand?: string                               // Nhu cầu: 'rent' | 'buy'
   province?: string
   district?: string
   rental_price_min?: number
@@ -278,4 +280,22 @@ export interface SectionData {
   index: number;
   title: string;
   backgroundType?: 'image' | 'light';
+}
+
+// Detail discriminated union for shared layout
+export type DetailEntity =
+  | { kind: 'property'; item: Property }
+  | { kind: 'industrialPark'; item: IndustrialPark };
+
+export interface SimilarItemCardData {
+  id: string;
+  slug: string;
+  name: string;
+  thumbnail_url?: string;
+  area?: number; // For property
+  total_area?: number; // For industrial park
+  price?: number; // For property
+  rental_price_min?: number; // For industrial park
+  rental_price_max?: number; // For industrial park
+  province?: string;
 }

@@ -19,6 +19,7 @@ export default function PropertyFilterBar({
 }) {
   const [filters, setFilters] = useState<PropertyFilter>({
     q: '',
+    demand: undefined,
     type: defaultType,
     province: undefined,
     district: undefined,
@@ -44,6 +45,11 @@ export default function PropertyFilterBar({
   }
 
   // Options
+  const demandOptions: Option[] = [
+    { label: 'Thuê', value: 'rent' },
+    { label: 'Mua sở hữu', value: 'buy' },
+  ]
+
   const typeOptions: Option[] = [
     { label: 'Nhà phố', value: 'nha-pho' },
     { label: 'Căn hộ', value: 'can-ho' },
@@ -133,7 +139,7 @@ export default function PropertyFilterBar({
 
       {/* Row 1: Basic Search */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-4 mt-2">
-        <div className="lg:col-span-4 relative">
+        <div className="lg:col-span-3 relative">
           <input
             value={filters.q || ''}
             onChange={e => emit({ q: e.target.value })}
@@ -141,6 +147,17 @@ export default function PropertyFilterBar({
             className="w-full h-12 md:h-14 px-4 md:px-5 pr-12 rounded-xl border border-gray-200 focus:border-goldDark outline-none"
           />
           <Search className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-goldDark" />
+        </div>
+        <div className="lg:col-span-2">
+          <ProductFilterDropdown
+            label="Nhu cầu"
+            options={demandOptions}
+            value={filters.demand || ''}
+            onChange={v => emit({ demand: v || undefined })}
+            isOpen={activeDropdown === 'demand'}
+            onOpen={() => setActiveDropdown('demand')}
+            onClose={() => setActiveDropdown(null)}
+          />
         </div>
         <div className="lg:col-span-2">
           <ProductFilterDropdown
@@ -153,7 +170,7 @@ export default function PropertyFilterBar({
             onClose={() => setActiveDropdown(null)}
           />
         </div>
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-2">
           <ProductFilterDropdown
             label="Tỉnh/Thành"
             options={provinceOptions}
