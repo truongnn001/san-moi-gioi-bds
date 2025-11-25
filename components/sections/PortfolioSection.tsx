@@ -149,15 +149,18 @@ export default function PortfolioSection() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-            <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid md:grid-cols-2 gap-4 md:gap-5"
+            >
               {visibleParks.map((park, idx) => (
-                <motion.div
-                  key={`${park.id}-${currentIndex}`}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                <div
+                  key={park.id}
                   className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 >
                   {/* Image */}
@@ -191,10 +194,11 @@ export default function PortfolioSection() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </AnimatePresence>
-          </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
           {/* Navigation Buttons */}
           <button

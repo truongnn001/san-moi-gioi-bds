@@ -11,27 +11,22 @@ export default function BackToTopMount() {
 
   // Wait for context to stabilize before rendering to avoid mount/unmount flickering
   useEffect(() => {
-    console.log('📌 BackToTopMount: totalSections =', totalSections)
-    // Longer delay to ensure FullpageScroll has initialized
+    // Reduced delay - FullpageScroll init is fast, just need single frame
     const timer = setTimeout(() => {
       setIsReady(true)
-      console.log('📌 BackToTopMount: ready to render, totalSections =', totalSections)
-    }, 200)
+    }, 50)
     return () => clearTimeout(timer)
   }, [totalSections])
 
   if (!isReady) {
-    console.log('📌 BackToTopMount: waiting...')
     return null
   }
 
   // If using full-screen-scroll, render the existing fullpage-aware button
   if (totalSections > 0) {
-    console.log('📌 BackToTopMount: rendering BackToTopButton (fullpage)')
     return <BackToTopButton />
   }
 
   // Otherwise, mount the dedicated normal-scroll movetop module
-  console.log('📌 BackToTopMount: rendering NormalScrollBackToTop')
   return <NormalScrollBackToTop />
 }
