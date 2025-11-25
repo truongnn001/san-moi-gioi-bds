@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import BackToTopButton from '@/components/common/BackToTopButton'
+import BackToTopMount from '@/components/layout/BackToTopMount'
 import { FullpageProvider } from '@/components/FullpageContext'
 import { LayoutMeasurementsProvider } from '@/components/LayoutMeasurementsContext'
 
@@ -71,7 +71,8 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
-            <BackToTopButton />
+            {/* Movetop: fullpage uses its own; normal scroll uses dedicated module */}
+            <BackToTopMount />
           </FullpageProvider>
         </LayoutMeasurementsProvider>
       </body>

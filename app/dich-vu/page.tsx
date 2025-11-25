@@ -9,7 +9,6 @@ import DesignConstructionSection from '@/components/services/DesignConstructionS
 import CaseStudiesSection from '@/components/services/CaseStudiesSection'
 import ServicesTestimonialsSection from '@/components/services/ServicesTestimonialsSection'
 import ServicesCTASection from '@/components/services/ServicesCTASection'
-import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Dịch vụ - Inland Real Estate',
@@ -41,7 +40,6 @@ export default function ServicesPage() {
         <ServicesTestimonialsSection />
         <ServicesCTASection />
       </FullpageScroll>
-      <Footer />
     </div>
   )
 }

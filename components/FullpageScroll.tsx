@@ -49,6 +49,15 @@ export default function FullpageScroll({
   const totalSections = children.length
   const isAtLastSection = currentSection === totalSections - 1
 
+  // Debug logging
+  useEffect(() => {
+    console.log('=== FULLPAGE SCROLL INITIALIZED ===')
+    console.log('totalSections:', totalSections)
+    console.log('sections.length:', sections.length)
+    console.log('children:', React.Children.toArray(children).length)
+    console.log('sections:', sections)
+  }, [totalSections, sections, children])
+
   // Add fullpage-active class on mount, remove on unmount
   useEffect(() => {
     document.body.classList.add('fullpage-active')

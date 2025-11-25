@@ -3,7 +3,6 @@ import FullpageScroll, { SectionData } from '@/components/FullpageScroll'
 import ContactIntro from '@/components/contact/ContactIntro'
 import ContactInfo from '@/components/contact/ContactInfo'
 import ContactForm from '@/components/contact/ContactForm'
-import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Liên hệ - INLANDV Real Estate',
@@ -24,9 +23,6 @@ export default function ContactPage() {
         <ContactInfo />
         <ContactForm />
       </FullpageScroll>
-      
-      {/* Footer - accessible via natural scroll after last section */}
-      <Footer />
     </div>
   )
 }

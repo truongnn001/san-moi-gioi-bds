@@ -6,7 +6,6 @@ import ProjectsSection from '@/components/sections/ProjectsSection'
 import PortfolioSection from '@/components/sections/PortfolioSection'
 import NewsSection from '@/components/sections/NewsSection'
 import ContactSection from '@/components/sections/ContactSection'
-import Footer from '@/components/layout/Footer'
 
 const sections: SectionData[] = [
   { id: 'hero', index: 0, title: 'Trang chủ', backgroundType: 'image' },
@@ -28,9 +27,6 @@ export default function HomePage() {
         <NewsSection />
         <ContactSection />
       </FullpageScroll>
-      
-      {/* Footer - accessible via natural scroll after last section */}
-      <Footer />
     </div>
   )
 }

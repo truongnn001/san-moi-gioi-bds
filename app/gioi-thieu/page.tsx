@@ -8,7 +8,6 @@ import CompanyIntro from '@/components/about/CompanyIntro'
 import KeyTeam from '@/components/about/KeyTeam'
 import OrgChart from '@/components/about/OrgChart'
 import KeyClients from '@/components/about/KeyClients'
-import Footer from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Giới thiệu - Inland Real Estate',
@@ -38,9 +37,6 @@ export default function AboutPage() {
         <OrgChart />
         <KeyClients />
       </FullpageScroll>
-      
-      {/* Footer - accessible via natural scroll after last section */}
-      <Footer />
     </div>
   )
 }

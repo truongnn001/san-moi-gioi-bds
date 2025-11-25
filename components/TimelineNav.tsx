@@ -39,7 +39,10 @@ export default function TimelineNav({ sections, activeSection, onSectionClick, b
   }, [setTimelineWidth])
 
   // Helpers
-  const capitalizeFirst = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
+  const capitalizeFirst = (str: string) => {
+    if (!str || typeof str !== 'string') return ''
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
 
   return (
     <nav

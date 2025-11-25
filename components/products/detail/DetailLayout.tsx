@@ -27,7 +27,7 @@ export const DetailLayout: React.FC<DetailLayoutProps> = ({ entity, similarItems
   const videoUrl = (data as any).video_url
 
   return (
-    <div className="container mx-auto max-w-6xl px-4 py-10">
+    <div className="container mx-auto max-w-6xl px-4 py-10" data-bg-type="light">
       {/* Hero Media */}
       <MediaSlider images={images} videoUrl={videoUrl} aspect="4:3" />
 
