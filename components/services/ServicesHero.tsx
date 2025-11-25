@@ -54,6 +54,17 @@ export default function ServicesHero() {
           <p className="text-base md:text-lg text-gray-200 mb-6 max-w-3xl mx-auto leading-relaxed">
             Đồng hành trên mọi chặng đường, từ tìm kiếm đến xây dựng và phát triển.
           </p>
+          <a
+            href="/brochures/dich-vu.pdf"
+            download
+            className="inline-flex items-center gap-2 px-7 py-3 bg-goldLight text-gray-900 font-semibold rounded-lg hover:bg-goldLight/90 transition-colors shadow-md hover:shadow-lg"
+            aria-label="Tải Brochure dịch vụ"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Tải Brochure
+          </a>
         </motion.div>
       </div>
     </section>

@@ -70,7 +70,7 @@ export default function DesignConstructionSection() {
           <h2 className="text-xl md:text-2xl font-bold mb-2">
             Triển Khai <span className="text-goldLight">Chuẩn Hoá</span> & Tối ưu Dòng Chảy Sản Xuất
           </h2>
-          <p className="text-sm md:text-base text-gray-100 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base text-gray-100 max-w-3xl mx-auto mb-4">
             Quy trình tích hợp từ khảo sát đến vận hành đầu kỳ đảm bảo hiệu suất và khả năng mở rộng trong tương lai.
           </p>
         </motion.div>

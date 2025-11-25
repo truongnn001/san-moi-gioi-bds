@@ -30,19 +30,26 @@ export default function IndustrialParksPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-goldDark to-goldLight text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ y: 20 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Khu công nghiệp</h1>
-            <p className="text-lg md:text-xl text-white/90">
-              Tìm kiếm khu công nghiệp phù hợp cho doanh nghiệp của bạn
-            </p>
-          </motion.div>
+      {/* Hero Section with background image + dark overlay (taller by ~15-20%) */}
+      <div className="relative text-white">
+        <div
+          className="absolute inset-0 bg-center bg-cover"
+          style={{ backgroundImage: "url(/images/contact-intro-bg.jpg)" }}
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative py-20 md:py-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Khu công nghiệp</h1>
+              <p className="text-lg md:text-xl text-white/90">
+                Tìm kiếm khu công nghiệp phù hợp cho doanh nghiệp của bạn
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
 
@@ -125,23 +132,30 @@ export default function IndustrialParksPage() {
           </div>
         )}
 
-        {/* CTA Section */}
+        {/* CTA Section with background image + dark overlay */}
         <motion.div
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 bg-gradient-to-r from-goldDark to-goldLight rounded-2xl p-8 md:p-12 text-white text-center"
+          className="mt-16 relative overflow-hidden rounded-2xl text-white text-center"
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Cần tư vấn về khu công nghiệp?</h2>
-          <p className="text-lg text-white/90 mb-6">
-            Đội ngũ chuyên gia của chúng tôi sẵn sàng hỗ trợ bạn tìm kiếm khu công nghiệp phù hợp nhất
-          </p>
-          <a
-            href="/lien-he"
-            className="inline-block px-8 py-3 bg-white text-goldDark font-semibold rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Liên hệ tư vấn
-          </a>
+          <div
+            className="absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: "url(/images/contact-form-bg.jpg)" }}
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="relative p-8 md:p-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Cần tư vấn về khu công nghiệp?</h2>
+            <p className="text-lg text-white/90 mb-6">
+              Đội ngũ chuyên gia của chúng tôi sẵn sàng hỗ trợ bạn tìm kiếm khu công nghiệp phù hợp nhất
+            </p>
+            <a
+              href="/lien-he"
+              className="inline-block px-8 py-3 bg-white text-goldDark font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              Liên hệ tư vấn
+            </a>
+          </div>
         </motion.div>
       </div>
     </div>

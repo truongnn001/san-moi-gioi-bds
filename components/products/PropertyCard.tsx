@@ -48,10 +48,10 @@ export default function PropertyCard({ property }: { property: Property }) {
       whileInView={{ y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="group"
+      className="group h-full"
     >
       <Link href={`/bat-dong-san/${property.slug}`}>
-        <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
           {/* Image */}
           <div className="relative h-56 overflow-hidden">
             <div
@@ -69,13 +69,12 @@ export default function PropertyCard({ property }: { property: Property }) {
           </div>
 
           {/* Content */}
-          <div className="p-5">
-            {/* Title & Code */}
+          <div className="p-5 flex-1 flex flex-col">
+            {/* Title */}
             <div className="flex items-start justify-between mb-2">
               <h3 className="text-lg font-bold text-gray-900 group-hover:text-goldDark transition-colors line-clamp-2 flex-1">
                 {property.name}
               </h3>
-              <div className="text-xs text-gray-500 ml-2 shrink-0">{property.code}</div>
             </div>
 
             {/* Location */}
@@ -112,7 +111,7 @@ export default function PropertyCard({ property }: { property: Property }) {
             )}
 
             {/* Price */}
-            <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+            <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-100">
               <div>
                 <div className="text-2xl font-bold text-goldDark">{formatPrice(property.price)}</div>
                 {property.price_per_sqm && (

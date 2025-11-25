@@ -33,19 +33,26 @@ export default function PropertiesListPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-goldDark to-goldLight text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ y: 20 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Bất động sản</h1>
-            <p className="text-lg md:text-xl text-white/90">
-              Khám phá hàng nghìn bất động sản chất lượng cao tại Việt Nam
-            </p>
-          </motion.div>
+      {/* Hero Section with background image + dark overlay (taller by ~15-20%) */}
+      <div className="relative text-white">
+        <div
+          className="absolute inset-0 bg-center bg-cover"
+          style={{ backgroundImage: "url(/images/contact-intro-bg.jpg)" }}
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative py-20 md:py-28">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Bất động sản</h1>
+              <p className="text-lg md:text-xl text-white/90">
+                Khám phá hàng nghìn bất động sản chất lượng cao tại Việt Nam
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
 

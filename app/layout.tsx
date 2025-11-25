@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
 import BackToTopButton from '@/components/common/BackToTopButton'
 import { FullpageProvider } from '@/components/FullpageContext'
 import { LayoutMeasurementsProvider } from '@/components/LayoutMeasurementsContext'
@@ -69,6 +70,7 @@ export default function RootLayout({
             <main>
               {children}
             </main>
+            <Footer />
             <BackToTopButton />
           </FullpageProvider>
         </LayoutMeasurementsProvider>
