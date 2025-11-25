@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import FullpageScroll, { SectionData } from '@/components/FullpageScroll'
-import HashNavigationHandler from '@/components/HashNavigationHandler'
+import SectionNavigationHandler from '@/components/SectionNavigationHandler'
 import ServicesHero from '@/components/services/ServicesHero'
 import BrokerageSection from '@/components/services/BrokerageSection'
 import LegalInvestmentSection from '@/components/services/LegalInvestmentSection'
@@ -29,7 +30,9 @@ const sections: SectionData[] = [
 export default function ServicesPage() {
   return (
     <div className="relative">
-      <HashNavigationHandler sections={sections} />
+      <Suspense fallback={null}>
+        <SectionNavigationHandler sections={sections} />
+      </Suspense>
       <FullpageScroll sections={sections}>
         <ServicesHero />
         <BrokerageSection />
