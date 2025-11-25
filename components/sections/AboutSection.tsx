@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Target, Award, Users, TrendingUp } from 'lucide-react'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function AboutSection() {
+  const revealed = useSectionReveal(1) // Section index in homepage
   const features = [
     {
       icon: Target,
@@ -33,18 +35,16 @@ export default function AboutSection() {
         <div className="text-center mb-4 md:mb-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: revealed ? 0.1 : 0 }}
             className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2"
           >
             Về <span className="text-goldDark">Inland Real Estate</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: revealed ? 0.2 : 0 }}
             className="text-xs md:text-sm lg:text-base text-gray-600 max-w-3xl mx-auto"
           >
             Với hơn 15 năm kinh nghiệm trong lĩnh vực bất động sản, chúng tôi tự hào là đối tác đáng tin cậy
@@ -57,9 +57,8 @@ export default function AboutSection() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: revealed ? 0.3 + index * 0.1 : 0 }}
               whileHover={{ y: -5 }}
               className="bg-white rounded-xl p-3 md:p-4 lg:p-5 shadow-lg hover:shadow-xl transition-shadow duration-300"
             >

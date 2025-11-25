@@ -4,9 +4,11 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
 import { Mail, FileSpreadsheet, ArrowRightCircle } from 'lucide-react'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function ServicesCTASection() {
   const sectionRef = useRef(null)
+  const revealed = useSectionReveal(7) // Section index in dich-vu page
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start']
@@ -41,9 +43,8 @@ export default function ServicesCTASection() {
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 text-center">
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={revealed ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="mb-6 md:mb-8"
         >
           <div className="inline-block px-4 py-2 bg-white/10 rounded-full mb-3">
@@ -66,9 +67,8 @@ export default function ServicesCTASection() {
               <motion.div
                 key={i}
                 initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                viewport={{ once: true }}
+                animate={revealed ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: revealed ? i * 0.05 : 0 }}
                 className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition"
               >
                 <Icon className="w-8 h-8 text-goldLight mb-4 mx-auto" />

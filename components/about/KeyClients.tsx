@@ -3,10 +3,12 @@
 import { motion } from 'framer-motion'
 import { Building2, Factory, MapPin, Users, Award, Star } from 'lucide-react'
 import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function KeyClients() {
   const { headerHeight } = useLayoutMeasurements()
   const paddingTop = headerHeight + 30
+  const revealed = useSectionReveal(6) // Section index in gioi-thieu page
 
   const clients = [
     {
@@ -34,9 +36,8 @@ export default function KeyClients() {
       >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-5"
         >
           <div className="inline-block px-4 py-2 bg-goldLight/10 rounded-full mb-3">
@@ -55,9 +56,8 @@ export default function KeyClients() {
         {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: revealed ? 0.2 : 0 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3"
         >
           <div className="bg-gradient-to-br from-goldLight/10 to-goldLight/5 rounded-xl p-4 border border-goldDark/10 text-center">
@@ -88,9 +88,8 @@ export default function KeyClients() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              viewport={{ once: true }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: revealed ? 0.3 + index * 0.1 : 0 }}
               className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 hover:border-goldDark/30 hover:shadow-xl transition-all duration-300"
             >
               <div className="aspect-video bg-gray-100 rounded-xl mb-4 flex items-center justify-center">
@@ -110,9 +109,8 @@ export default function KeyClients() {
 
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
+          animate={revealed ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: revealed ? 0.6 : 0 }}
           className="text-center mt-8"
         >
           <p className="text-gray-600 italic">

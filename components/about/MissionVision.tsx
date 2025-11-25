@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Target, Rocket, Eye, Heart } from 'lucide-react'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function MissionVision() {
+  const revealed = useSectionReveal(2) // Section index in gioi-thieu page
   const items = [
     {
       icon: Eye,
@@ -36,9 +38,8 @@ export default function MissionVision() {
       <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-4 md:py-6 h-full flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-8"
         >
           <div className="inline-block px-4 py-2 bg-goldLight/10 rounded-full mb-3">
@@ -59,9 +60,8 @@ export default function MissionVision() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-              viewport={{ once: true }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: revealed ? 0.1 + index * 0.1 : 0 }}
               className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border-2 border-gray-100 hover:border-goldDark/30 hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-start gap-4">

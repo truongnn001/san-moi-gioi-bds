@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Building2, Users2, UserCircle2, Briefcase } from 'lucide-react'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 const orgData = [
   {
@@ -37,14 +38,15 @@ const orgData = [
 ]
 
 export default function OrgChart() {
+  const revealed = useSectionReveal(5) // Section index in gioi-thieu page
+
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white">
       <div className="w-full max-w-[1600px] mx-auto px-8 sm:px-12 md:px-16 lg:px-20 py-6 md:py-8 max-h-[85vh] overflow-y-auto scrollbar-hide flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-4 md:mb-6"
         >
           <div className="inline-block px-3 py-1 bg-goldLight/10 rounded-full mb-2">
@@ -66,9 +68,8 @@ export default function OrgChart() {
           {/* Level 1: Leadership */}
           <motion.div
             initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, delay: revealed ? 0.2 : 0 }}
             className="flex justify-center mb-6 md:mb-8"
           >
             <div className="relative">
@@ -101,9 +102,8 @@ export default function OrgChart() {
           {/* Level 2: Departments */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
+            animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: revealed ? 0.4 : 0 }}
             className="grid md:grid-cols-3 gap-4 md:gap-6"
           >
             {orgData[1].departments?.map((dept, index) => {
@@ -112,9 +112,8 @@ export default function OrgChart() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                viewport={{ once: true }}
+                animate={revealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, delay: revealed ? 0.6 + index * 0.1 : 0 }}
                 className="relative"
               >
                 {/* Connection line to parent */}
@@ -148,9 +147,8 @@ export default function OrgChart() {
         {/* Additional info */}
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          viewport={{ once: true }}
+          animate={revealed ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: revealed ? 0.8 : 0 }}
           className="mt-6 md:mt-8 text-center"
         >
           <p className="text-gray-600 text-sm">

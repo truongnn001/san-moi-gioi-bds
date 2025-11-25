@@ -3,10 +3,12 @@
 import { motion } from 'framer-motion'
 import { Users, Briefcase, Globe2, HeartHandshake, Building2, UserCog } from 'lucide-react'
 import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function FDISupportSection() {
   const { headerHeight } = useLayoutMeasurements()
   const paddingTop = headerHeight + 30
+  const revealed = useSectionReveal(3) // Section index in dich-vu page
 
   const pillars = [
     { icon: Users, title: 'Tuyển dụng địa phương', desc: 'Kết nối nguồn nhân lực phù hợp ngành & văn hoá.' },
@@ -41,9 +43,8 @@ export default function FDISupportSection() {
       >
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={revealed ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-5 md:mb-6"
         >
           <div className="inline-block px-4 py-2 bg-goldLight/10 rounded-full mb-3">
@@ -66,9 +67,8 @@ export default function FDISupportSection() {
               <motion.div
                 key={i}
                 initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                viewport={{ once: true }}
+                animate={revealed ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: revealed ? i * 0.05 : 0 }}
                 className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="w-12 h-12 rounded-xl bg-goldLight/25 flex items-center justify-center mb-3">

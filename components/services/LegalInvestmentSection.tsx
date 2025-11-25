@@ -3,10 +3,12 @@
 import { motion } from 'framer-motion'
 import { FileCheck, Hammer, ShieldCheck, ScrollText } from 'lucide-react'
 import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function LegalInvestmentSection() {
   const { headerHeight } = useLayoutMeasurements()
   const paddingTop = headerHeight + 30
+  const revealed = useSectionReveal(2) // Section index in dich-vu page
 
   const services = [
     { icon: FileCheck, title: 'Giấy phép đầu tư', desc: 'Tư vấn hồ sơ & tối ưu thời gian xử lý' },
@@ -30,9 +32,8 @@ export default function LegalInvestmentSection() {
       >
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={revealed ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-5 md:mb-6"
         >
           <div className="inline-block px-4 py-2 bg-goldLight/10 rounded-full mb-3">
@@ -52,9 +53,8 @@ export default function LegalInvestmentSection() {
           {/* Services list */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
+            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+            transition={{ duration: 0.6, delay: revealed ? 0.1 : 0 }}
             className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
           >
             <h3 className="text-lg font-bold text-gray-900 mb-4">Dịch vụ cụ thể</h3>

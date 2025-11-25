@@ -2,21 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { UserCircle, Briefcase, Scale, Building2 } from 'lucide-react'
-import { useFullpage } from '@/components/FullpageContext'
-import { useEffect, useState } from 'react'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function KeyTeam() {
-  // Section index in gioi-thieu page definition
-  const SECTION_INDEX = 4
-  const { currentSection } = useFullpage()
-  const [revealed, setRevealed] = useState(false)
-
-  useEffect(() => {
-    if (currentSection === SECTION_INDEX && !revealed) {
-      // Force reveal when navigated directly via hash (#doi-ngu)
-      setRevealed(true)
-    }
-  }, [currentSection, revealed])
+  const revealed = useSectionReveal(4) // Section index in gioi-thieu page
   const experts = [
     {
       category: 'Chuyên gia tư vấn',

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 const LeafletMap = dynamic(() => import('../products/detail/LeafletMap'), { ssr: false })
 
@@ -28,6 +29,8 @@ const contactInfo = [
 ]
 
 export default function ContactInfo() {
+  const revealed = useSectionReveal(1) // Section index in lien-he page
+
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 overflow-hidden pt-20 md:pt-24">
       {/* Background Pattern */}
@@ -46,8 +49,7 @@ export default function ContactInfo() {
       <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-16 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
@@ -66,9 +68,8 @@ export default function ContactInfo() {
             const content = (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
+                animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: revealed ? index * 0.15 : 0 }}
                 className={`
                   group relative bg-neutral-800/50 backdrop-blur-sm border border-goldDark/20
                   rounded-2xl p-6 text-center h-full flex flex-col

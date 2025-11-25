@@ -5,11 +5,13 @@ import { useRef } from 'react'
 import { useFullpage } from '@/components/FullpageContext'
 import { Ruler, Hammer, ClipboardList, Layers, Building, BadgeCheck } from 'lucide-react'
 import { useLayoutMeasurements } from '@/components/LayoutMeasurementsContext'
+import { useSectionReveal } from '@/hooks/useSectionReveal'
 
 export default function DesignConstructionSection() {
   const { headerHeight } = useLayoutMeasurements()
   const paddingTop = headerHeight + 30
   const sectionRef = useRef(null)
+  const revealed = useSectionReveal(4) // Section index in dich-vu page
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -59,9 +61,8 @@ export default function DesignConstructionSection() {
       >
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={revealed ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center mb-5 md:mb-6"
         >
           <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur rounded-full mb-3">
@@ -84,9 +85,8 @@ export default function DesignConstructionSection() {
               <motion.div
                 key={i}
                 initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                viewport={{ once: true }}
+                animate={revealed ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: revealed ? i * 0.05 : 0 }}
                 className="p-4 rounded-xl bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15 transition"
               >
                 <div className="w-10 h-10 rounded-lg bg-goldLight/30 flex items-center justify-center mb-2">
